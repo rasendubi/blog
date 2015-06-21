@@ -1,7 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main (main) where
 import           Data.Monoid (mappend)
-import           Hakyll
+import           Hakyll hiding (defaultContext)
+import qualified Hakyll as H (defaultContext)
 
 import Data.List (isInfixOf, isPrefixOf, isSuffixOf)
 import System.FilePath.Posix (takeBaseName, takeDirectory, (</>), splitFileName)
@@ -166,6 +167,15 @@ postTitleCtx :: Context String
 postTitleCtx = field "page_title" $ \item -> do
     metadata <- getMetadata (itemIdentifier item)
     return $ maybe "" (++ " | Alexey Shmalko's Personal Blog") $ M.lookup "title" metadata
+
+defaultContext = fullUrlCtx `mappend` H.defaultContext
+
+fullUrlCtx :: Context String
+fullUrlCtx = mapContext fullUrlCtx' (urlField "url")
+    where
+        fullUrlCtx' x
+            | "index.html" `isSuffixOf` x = reverse $ drop 10 $ reverse x
+            | otherwise = x
 
 removePosts :: Routes
 removePosts = gsubRoute "posts/" (const "") 
