@@ -1,0 +1,19 @@
+$for(posts)$
+    <div class="row">
+        <div class="caption">
+            <h1 class="post-title"><a href="$url$">$title$</a></h1>
+        </div>
+        <div class="info">
+            $date$
+            $if(author)$
+                by $author$
+            $endif$
+        </div>
+
+        $if(teaser)$
+            $teaser$
+            <p><a href="$url$" class="more-link">Continue reading...</a></p>
+        $endif$
+        <hr />
+    </div>
+$endfor$

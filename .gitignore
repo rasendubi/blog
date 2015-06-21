@@ -1,0 +1,4 @@
+dist
+_site
+_cache
+cabal.sandbox.config

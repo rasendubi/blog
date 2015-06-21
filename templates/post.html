@@ -1,0 +1,14 @@
+<div class="info">
+    Posted on $date$
+    $if(author)$
+        by $author$
+    $endif$
+    <br />
+    $if(tags)$
+    Tags: $tags$
+    $endif$
+</div>
+
+$body$
+
+$partial("templates/disqus.html")$

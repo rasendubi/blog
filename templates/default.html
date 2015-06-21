@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        $if(page_title)$
+            <title>$page_title$</title>
+        $else$
+            <title>Alexey Shmalko's Personal Blog</title>
+        $endif$
+        $if(description)$
+            <meta name="description" content="$description$" />
+        $endif$
+        $if(keywords)$
+            <meta name="keywords" content="$keywords$" />
+        $endif$
+        <link rel="canonical" href="$url$" />
+
+        <link rel="alternate" href="/rss.xml" title="Alexey Shmalko's Personal Blog" type="application/rss+xml" />
+        <link rel="alternate" href="/atom.xml" title="Alexey Shmalko's Personal Blog" type="application/atom+xml" />
+
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    </head>
+
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Alexey Shmalko's Personal Blog</a>
+                </div>
+                <div class="collapse navbar-collapse" id="menu-collapse">
+                    <ul class="navbar-right nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about-me/">About</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                        <li><a href="/archive/">Archive</a></li>
+                        <li class="dropdown">
+                            <a href=#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Feed <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/rss.xml">RSS</a></li>
+                                <li><a href="/atom.xml">Atom</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div id="content">
+                $body$
+            </div>
+
+            <div id="footer">
+                Powered by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        $partial("templates/google-analytics.html")$
+    </body>
+</html>

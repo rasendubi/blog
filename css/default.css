@@ -1,0 +1,176 @@
+body {
+    text-rendering: optimizeLegibility;
+}
+
+html>body {
+    line-height: 1.5em;
+}
+
+body, input, button {
+    -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.navbar-brand {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    height: 2em;
+}
+
+img { max-width: 100%; }
+
+h1 { font-size: 2.25em; line-height: 1.3333em; margin-top: 0.66667em; padding-bottom: 0px; margin-bottom: 0px; }
+h2 { font-size: 1.5em; line-height: 1em; padding-top: 0px; padding-bottom: 0px; margin-top: 1em; margin-bottom: 1em; }
+h3 { font-size: 1.3125em; line-height: 1.14286em; padding-top: 0px; padding-bottom: 0px; margin-top: 1.14286em; margin-bottom: 1.14286em; }
+h4 { font-size: 1.125em; line-height: 1.3333em; padding-top: 0px; padding-bottom: 0px; margin-top: 1.33333em; margin-bottom: 1.33333em; }
+h5 { font-size: 1em; line-height: 1.5em; padding-top: 0px; padding-bottom: 0px; margin-top: 1.5em; margin-bottom: 1.5em; }
+h6 { font-size: 0.75em; line-height: 2em; padding-top: 0px; padding-bottom: 0px; margin-top: 2em; margin-bottom: 2em; }
+
+hr { padding-top: 0.6875em; padding-bottom: 0.65em; margin-top: 0px; margin-bottom: 0px; }
+
+li p {
+    margin-top: 0px;
+}
+
+li p:first-child {
+    margin-bottom: 0px;
+}
+
+ul, ol {
+    margin-bottom: 0px;
+}
+
+p {
+    line-height: 1.5em;
+    padding-top: 0px;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+pre {
+    font-size: 1em;
+    padding: 0.6875em 0.6875em 0.6875em 0.6875em;
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+}
+
+code {
+    line-height: 1.25em;
+    font-size: 0.875em;
+}
+
+pre code {
+    line-height: 1.5em;
+    font-size: 1em;
+
+    overflow-x: auto;
+    word-wrap: normal;
+    white-space: pre;
+
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+code, pre {
+    font-family: monospace, Menlo, Monaco, Consolas, 'Courier New';
+}
+
+p+div.sourceCode, p+pre {
+    margin-top: -0.75em;
+}
+div.sourceCode+p, pre+p {
+    margin-top: 0.75em;
+}
+
+div#footer {
+    margin-top: 1.5em;
+    border-top: solid 0.125em black;
+    color: #555;
+    font-size: 0.75em;
+    padding: 0.75em 0em 0.75em 0em;
+    text-align: right;
+}
+
+div.info {
+    color: #555;
+    font-style: italic;
+    margin-bottom: 1.5em;
+    padding-left: 0.25em;
+}
+
+div#content {
+    padding: 0em 0.75em 0em 0.75em;
+}
+
+a, a:visited {
+    color: #1abc9c;
+    text-decoration: underline;
+}
+
+a:hover, a:focus {
+    color: #117964;
+    text-decoration: none;
+}
+
+.post-title a, .navbar a {
+    color: black;
+    text-decoration: none;
+}
+
+.post-title a:hover, .post-title a:focus {
+    color: #555;
+}
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+}
+
+/* syntax highlight */
+
+.kw {
+    color: red;
+}
+
+.st {
+    color: green;
+}
+
+.dt {
+    color: blue;
+}
+
+.co {
+    color: grey;
+}
+
+.cpp .ot {
+    color: green;
+}
+
+.dv {
+    color: purple;
+}
