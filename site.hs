@@ -27,18 +27,21 @@ rewriteSitemap x
     | "index.html" `isSuffixOf` x = ('/' :) $ reverse $ drop 10 $ reverse x
     | otherwise = '/' : x
 
+changeFrequency :: String -> ChangeFrequency
 changeFrequency "index.html" = Daily
 changeFrequency "archive/index.html" = Daily
 changeFrequency "about-me/index.html" = Yearly
 changeFrequency "contact/index.html" = Yearly
 changeFrequency x = Monthly
 
+priority :: String -> Double
 priority "index.html" = 1
 priority "archive/index.html" = 0.2
 priority "about-me/index.html" = 0.3
 priority "contact/index.html" = 0.3
 priority _ = 1
 
+sitemapFilter' :: String -> Bool
 sitemapFilter' "404.html" = False
 sitemapFilter' x | "tags" `isPrefixOf` x = False
 sitemapFilter' _ = True
@@ -158,10 +161,11 @@ main = hakyll $ do
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
-postCtx =
-    dateField "date" "%B %e, %Y" `mappend`
-    postTitleCtx `mappend`
-    defaultContext
+postCtx = mconcat
+    [ dateField "date" "%B %e, %Y"
+    , postTitleCtx
+    , defaultContext
+    ]
 
 postTitleCtx :: Context String
 postTitleCtx = field "page_title" $ \item -> do
@@ -173,6 +177,7 @@ defaultContext = fullUrlCtx `mappend` H.defaultContext
 fullUrlCtx :: Context String
 fullUrlCtx = mapContext fullUrlCtx' (urlField "url")
     where
+        fullUrlCtx' :: String -> String
         fullUrlCtx' x
             | "index.html" `isSuffixOf` x = reverse $ drop 10 $ reverse x
             | otherwise = x
@@ -189,6 +194,7 @@ niceRoute = customRoute createIndexRoute
         createIndexRoute ident = normalize $ takeDirectory p </> takeBaseName p </> "index.html"
             where
                 p = toFilePath ident
+                normalize :: String -> String
                 normalize p' = if "./" `isPrefixOf` p' then drop 2 p' else p'
 
 removeAllIndexHtml :: Item String -> Compiler (Item String)

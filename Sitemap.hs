@@ -17,7 +17,6 @@ import           Hakyll
 import           System.Directory    (getModificationTime)
 import           System.FilePath     (takeExtensions)
 import           System.IO.Error
-import           System.Locale       (defaultTimeLocale)
 import           Text.XML.Light
 
 

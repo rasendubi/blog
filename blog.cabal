@@ -7,14 +7,14 @@ executable site
   main-is:          site.hs
   other-modules:    Sitemap
   build-depends:    base == 4.*
-                  , hakyll == 4.6.*
+                  , hakyll
                   , filepath
                   , containers
                   , xml
                   , data-default-class
                   , time
                   , old-locale
-                  , time
+                  , time == 1.5.*
                   , directory
   ghc-options:      -threaded
   default-language: Haskell2010
