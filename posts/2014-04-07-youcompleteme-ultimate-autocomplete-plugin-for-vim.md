@@ -27,6 +27,8 @@ For the more detailed feature overview, visit an [YCM home page](http://valloric
 
 ### Installation
 
+**Edit:** Install instruction changed a bit since this post was published. For full and up-to-date install instructions refer to the [documentation](https://github.com/Valloric/YouCompleteMe/blob/master/README.md#installation).
+
 Installation is pretty straightforward if you use [pathogen](https://github.com/tpope/vim-pathogen "pathogen"):
 
 ```bash
@@ -53,7 +55,7 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 You should replace ~/.vim/.ycm_extra_conf.py with path to your default file.
 
-After that, you should place some content to your extra conf. (Use [my conf](https://github.com/rasendubi/dotfiles/blob/d534c5fb6bf39f0d9c8668b564ab68b6e3a3eb78/.vim/.ycm_extra _conf.py ".ycm_extra_conf.py") as a template if you don't want bother with this)
+After that, you should place some content to your extra conf. (Use [my config](https://github.com/rasendubi/dotfiles/blob/master/.vim/.ycm_extra_conf.py) as a template if you don't want to bother with this)
 
 ### YouCompleteMe and UltiSnips
 
