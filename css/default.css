@@ -56,6 +56,10 @@ p {
     margin-bottom: 1.5em;
 }
 
+blockquote p {
+    margin-top: 0px;
+}
+
 pre {
     font-size: 1em;
     padding: 0.6875em 0.6875em 0.6875em 0.6875em;
