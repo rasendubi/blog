@@ -49,9 +49,13 @@ sitemapFilter' _ = True
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
-    match ("images/**" .||. "files/**" .||. "css/**" .||. "favicon.ico") $ do
+    match ("images/**" .||. "files/**" .||. "favicon.ico") $ do
         route   idRoute
         compile copyFileCompiler
+
+    match "css/**" $ do
+        route   idRoute
+        compile compressCssCompiler
 
     match "about-me.md" $ do
         route   $ constRoute "about-me/index.html"
