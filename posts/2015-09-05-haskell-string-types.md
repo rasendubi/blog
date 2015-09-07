@@ -2,11 +2,15 @@
 title: Haskell String Types
 author: Alexey Shmalko
 tags: haskell,strings
+keywords: haskell,string,text,bytestring
+description: Describes the difference and motivation between Haskell's String, Text, and ByteString types.
 ---
 
 The goal of this blog post is to ease the confusion of Haskell string types. I assume you already know what `String` is, so I'll only cover the difference between string types and help to build intuition on what type you should choose for the task in hand.
 
 <!--more-->
+
+***Note:*** It's a second edition of the blog post. You can find the first one on [github](https://github.com/rasendubi/blog/blob/2c52a3ed541c8a8a0b514b66816fd03d92919f7c/posts/2015-09-05-haskell-string-types.md) 
 
 ## String
 
@@ -20,19 +24,48 @@ This is good because you can use all functions for list manipulations on `String
 
 To see why overhead is so high, check [slide 43](http://image.slidesharecdn.com/slides-100930074853-phpapp01/95/highperformance-haskell-43-728.jpg) from Johan Tibell's [High-Performance Haskell](http://www.slideshare.net/tibbe/highperformance-haskell) presentation.
 
-That's why we have `ByteString`.
+That's why we have `Text`.
+
+## Text
+
+[`text`][text] package provides an efficient packed Unicode text type. Internally, the [`Text`][Data.Text.Text] type is represented as an array of `Word16` UTF-16 code units. The overhead for storing a string is 6 words.
+
+To convert between `String` and `Text` you can use [`pack`][Data.Text.pack] and [`unpack`][Data.Text.unpack] from [`Data.Text`][Data.Text] module.
+
+The [`Data.Text`][Data.Text] module also provides many functions to work with `Text` and mimics the list interface. It also provides a full-string [case conversion][text case conversion] functions (`map toUpper` doesn't work for Unicode because result could have different length). The module is intended to be imported qualified. There are also I/O functions in [`Data.Text.IO`][Data.Text.IO] module.
+
+The downside of storing the string in a strict array is that way it forces the whole string to be in memory at the same time, which negates lazy I/O (when you call [`readFile`][Data.Text.IO.readFile], it reads whole file in the memory before starting processing). That's why the library provides the second string type: [`Data.Text.Lazy.Text`][Data.Text.Lazy.Text]. It uses a lazy list of strict chunks, so this type is suitable for I/O streaming.
+
+You can think of lazy `Text` as `[Data.Text.Text]`. In fact there are [`toChunks`][Data.Text.Lazy.toChunks] and [`fromChunks`][Data.Text.Lazy.fromChunks] functions that convert lazy `Text` to/from a list of strict `Text`.
+
+The [`Data.Text.Lazy`][Data.Text.Lazy] module copies the interface of `Data.Text` module but for lazy `Text`. To convert between strict and lazy `Text`, use [`toStrict`][Data.Text.Lazy.toStrict] and [`fromStrict`][Data.Text.Lazy.fromStrict] functions.
+
+[text]: http://hackage.haskell.org/package/text
+[Data.Text.pack]: http://hackage.haskell.org/package/text/docs/Data-Text.html#v:pack
+[Data.Text.unpack]: http://hackage.haskell.org/package/text/docs/Data-Text.html#v:unpack
+[Data.Text]: http://hackage.haskell.org/package/text/docs/Data-Text.html
+[Data.Text.Text]: http://hackage.haskell.org/package/text/docs/Data-Text.html#t:Text
+[text case conversion]: http://hackage.haskell.org/package/text-1.2.1.3/docs/Data-Text.html#g:8
+[Data.Text.IO]: http://hackage.haskell.org/package/text/docs/Data-Text-IO.html
+[Data.Text.IO.readFile]: http://hackage.haskell.org/package/text/docs/Data-Text-IO.html#v:readFile
+[Data.Text.Lazy]: http://hackage.haskell.org/package/text/docs/Data-Text-Lazy.html
+[Data.Text.Lazy.Text]: http://hackage.haskell.org/package/text/docs/Data-Text-Lazy.html#t:Text
+[Data.Text.Lazy.toChunks]: http://hackage.haskell.org/package/text/docs/Data-Text-Lazy.html#v:toChunks
+[Data.Text.Lazy.fromChunks]: http://hackage.haskell.org/package/text/docs/Data-Text-Lazy.html#v:fromChunks
+[Data.Text.Lazy.toStrict]: http://hackage.haskell.org/package/text/docs/Data-Text-Lazy.html#v:toStrict
+[Data.Text.Lazy.fromStrict]: http://hackage.haskell.org/package/text/docs/Data-Text-Lazy.html#v:fromStrict
 
 ## ByteString
 
-The [`bytestring`](http://hackage.haskell.org/package/bytestring) package provides an efficient compact, immutable byte string type. The [`Data.ByteString.ByteString`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString.html#t:ByteString) type keeps the string as a single large array. That's really fast and memory efficient. Furthermore, it's convenient for passing data between C and Haskell. The downside is that it forces whole string to be in memory at the same time, which negates lazy I/O (when you call [`readFile`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString.html#v:readFile), it reads whole file in the memory before starting processing).
+There is also a type you will see often called `ByteString`. The funny thing is that it's not intended to be a string. The `ByteString` type is an array of bytes that comes in both strict and lazy forms; it's really good for serialization and passing data between C and Haskell. It may be a bit faster than `Text` for some operations because `Text` does more work to handle Unicode properly.
 
-For that reason, the library contains second string type: [`Data.ByteString.Lazy.ByteString`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Lazy.html#t:ByteString). It uses a lazy list of strict chunks, so this type is suitable for I/O streaming.
+Generally, you shouldn't use this type for text manipulation as it doesn't support Unicode. But you should know how to deal with `ByteString`s because it's *de facto* standard type for networking, serialization and parsing in Haskell.
 
-You can think of lazy bytestring as `[Data.ByteString.ByteString]`. In fact there are [`toChunks`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Lazy.html#v:toChunks) and [`fromChunks`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Lazy.html#v:fromChunks) functions that convert lazy bytestring to/from a list of strict bytestrings.
+The standard view into `ByteString` types represent elements as `Word8`. [`Data.ByteString`][Data.ByteString] and [`Data.ByteString.Lazy`][Data.ByteString.Lazy] modules provide functions that mimic `[Word8]` interface.
 
-To convert between `String` and `Data.ByteString.ByteString` types, use [`Data.ByteString.pack`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString.html#v:pack) and [`Data.ByteString.unpack`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString.html#v:unpack) functions. There are same functions for lazy bytestrings in `Data.ByteString.Lazy` module.
+It's also possible to treat bytes as a Latin-1 encoded string. [`Data.ByteString.Char8`][Data.ByteString.Char8] and [`Data.ByteString.Lazy.Char8`][Data.ByteString.Lazy.Char8] modules re-export the same bytestring types (so you don't need to convert between `Data.ByteString.ByteString` and `Data.ByteString.Char8.ByteString` types) and provide functions to see `ByteString` as a list of `Char`s.
 
-***Note:*** calling `pack` on Unicode strings will truncate character codes and you definetely don't want this. You should use [`fromString`](https://hackage.haskell.org/package/utf8-string/docs/Data-ByteString-UTF8.html#v:fromString) and [`toString`](https://hackage.haskell.org/package/utf8-string/docs/Data-ByteString-UTF8.html#v:toString) functions from [`utf8-string`](https://hackage.haskell.org/package/utf8-string) module instead.
+But you should be cautious because truncating is possible. For example, calling [`pack`][Data.ByteString.Char8.pack] on Unicode strings will truncate character codes and you definetely don't want this. You should use [`fromString`](https://hackage.haskell.org/package/utf8-string/docs/Data-ByteString-UTF8.html#v:fromString) and [`toString`](https://hackage.haskell.org/package/utf8-string/docs/Data-ByteString-UTF8.html#v:toString) functions from [`utf8-string`](https://hackage.haskell.org/package/utf8-string) module instead.
 
 ```haskell
 Prelude> import qualified Data.ByteString.Char8 as BS
@@ -49,29 +82,22 @@ Prelude BS BU> putStrLn (BU.toString (BU.fromString "привет"))
 привет
 ```
 
-To convert between strict and lazy bytestrings use [`fromStrict`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Lazy.html#v:fromStrict) and [`toStrict`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Lazy.html#v:toStrict) from [`Data.ByteString.Lazy`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Lazy.html) module.
+The [`Data.Text.Encoding`][Data.Text.Encoding] module provides functions for encoding/decoding `Text` to `ByteString`.
 
-[`Data.ByteString`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString.html) and [`Data.ByteString.Lazy`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Lazy.html) modules implement many convenient functions and mimic the list interface. However, these modules treat string as a list of `Word8`. If you want to use bytestring as a list of `Char`s, you should use [`Data.ByteString.Char8`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Char8.html) and [`Data.ByteString.Lazy.Char8`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Lazy-Char8.html) modules.
-
-***Note:*** You may be confused that you have a new [`Data.ByteString.Char8.ByteString`](http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Char8.html#t:ByteString) type now and you don't know how to convert `Data.ByteString.ByteString` to `Data.ByteString.Char8.ByteString`. Don't worry! This is the same type, it's just re-exported from two modules.
-
-The final note on bytestrings: the library isn't designed for Unicode. For Unicode strings you should use `Text` from `text` package.
-
-## Text
-
-It's easier to handle [`text`](http://hackage.haskell.org/package/text) package after `bytestring` one, so I'll be short here.
-
-`text` package was designed specifically for Unicode. It's a bit slower than `bytestring` but still much faster than plain `String`. It comes in both strict and lazy variants in [`Data.Text`](http://hackage.haskell.org/package/text/docs/Data-Text.html) and [`Data.Text.Lazy`](http://hackage.haskell.org/package/text/docs/Data-Text-Lazy.html) modules.
-
-To convert between `String` and `text` strings you can use `pack` and `unpack` functions. To convert between `text` and `bytestring` use encoding functions from [`Data.Text.Encoding`](http://hackage.haskell.org/package/text/docs/Data-Text-Encoding.html) or [`Data.Text.Lazy.Encoding`](http://hackage.haskell.org/package/text/docs/Data-Text-Lazy-Encoding.html).
+[Data.ByteString]: http://hackage.haskell.org/package/bytestring/docs/Data-ByteString.html
+[Data.ByteString.Lazy]: http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Lazy.html
+[Data.ByteString.Char8]: http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Char8.html
+[Data.ByteString.Lazy.Char8]:http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Lazy-Char8.html
+[Data.ByteString.Char8.pack]: http://hackage.haskell.org/package/bytestring/docs/Data-ByteString-Char8.html#v:pack
+[Data.Text.Encoding]: http://hackage.haskell.org/package/text/docs/Data-Text-Encoding.html
 
 ## OverloadedStrings
 
-You may often need to create string literals of different types. One possible solution is to use functions to convert `String` to the type you need. For example:
+You may often need to create string literals of different types. One possible solution is to use functions to convert `String` literal to the type you need. For example:
 
 ```haskell
-Prelude> import qualified Data.ByteString.Char8 as BS
-Prelude BS> BS.pack "hello"
+Prelude> import qualified Data.Text as T
+Prelude T> T.pack "hello"
 "hello"
 ```
 
@@ -116,52 +142,16 @@ hello
 
 Choose `String` when you don't care about performance or strings are small (e.g. identifiers).
 
-Choose `ByteString` for lots of I/O, serialization or parsing.
+Choose `Text` for general text processing.
 
-Choose `Text` for Unicode text processing.
+Choose `ByteString` for storing raw bytes, serialization or parsing.
 
 That's basically all you should know to start working with strings.
 
-
 ### Further reading
 
-- [`bytestring`](http://hackage.haskell.org/package/bytestring) library;
-- [`utf8-string`](https://hackage.haskell.org/package/utf8-string) library;
 - [`text`](https://hackage.haskell.org/package/text) library;
 - [`text-icu`](http://hackage.haskell.org/package/text-icu) library for more Unicode features, encodings, normalization and regular expressions;
+- [`bytestring`](http://hackage.haskell.org/package/bytestring) library;
+- [`utf8-string`](https://hackage.haskell.org/package/utf8-string) library;
 - [`ListLike`](http://hackage.haskell.org/package/ListLike) package for common interface to all strings.
-
-### Appendix A. Conversion table
-In case you forgot how to convert between types, here is a table of conversions:
-<!--TODO insert links to functions-->
-<table>
-\   <tr><th>from \\ to</th><th>String</th></tr>
-\   <tr><td>Data.ByteString</td><td>`Data.ByteString.unpack` / `Data.ByteString.UTF8.toString`</td></tr>
-\   <tr><td>Data.ByteString.Lazy</td><td>`Data.ByteString.Lazy.unpack` / `Data.ByteString.Lazy.UTF8.toString`</td></tr>
-\   <tr><td>Data.Text</td><td>`Data.Text.unpack`</td></tr>
-\   <tr><td>Data.Text.Lazy</td><td>`Data.Text.Lazy.unpack`</td></tr>
-
-
-\   <tr><th>from \\ to</th><th>Data.ByteString</th></tr>
-\   <tr><td>String</td><td>`Data.ByteString.pack` / `Data.ByteString.UTF8.fromString`</td></tr>
-\   <tr><td>Data.ByteString.Lazy</td><td>`Data.ByteString.Lazy.toStrict`</td></tr>
-\   <tr><td>Data.Text</td><td>`Data.Text.Encoding.encodeUtf8`</td></tr>
-
-
-\   <tr><th>from \\ to</th><th>Data.ByteString.Lazy</th></tr>
-\   <tr><td>String</td><td>`Data.ByteString.Lazy.pack` / `Data.ByteString.UTF8.toString`</td></tr>
-\   <tr><td>Data.ByteString</td><td>`Data.ByteString.Lazy.fromStrict`</td></tr>
-\   <tr><td>Data.Text.Lazy</td><td>`Data.Text.Lazy.Encoding.encodeUtf8`</td></tr>
-
-
-\   <tr><th>from \\ to</th><th>Data.Text</th></tr>
-\   <tr><td>String</td><td>`Data.Text.pack`</td></tr>
-\   <tr><td>Data.ByteString</td><td>`Data.Text.Encoding.decodeUtf8`</td></tr>
-\   <tr><td>Data.Text.Lazy</td><td>`Data.Text.Lazy.toStrict`</td></tr>
-
-
-\   <tr><th>from \\ to</th><th>Data.Text.Lazy</th></tr>
-\   <tr><td>String</td><td>`Data.Text.Lazy.pack`</td></tr>
-\   <tr><td>Data.ByteString.Lazy</td><td>`Data.Text.Lazy.Encoding.decodeUtf8`</td></tr>
-\   <tr><td>Data.Text</td><td>`Data.Text.Lazy.fromStrict`</td></tr>
-</table>
