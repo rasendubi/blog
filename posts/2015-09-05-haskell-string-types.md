@@ -63,7 +63,7 @@ Generally, you shouldn't use this type for text manipulation as it doesn't suppo
 
 The standard view into `ByteString` types represent elements as `Word8`. [`Data.ByteString`][Data.ByteString] and [`Data.ByteString.Lazy`][Data.ByteString.Lazy] modules provide functions that mimic `[Word8]` interface.
 
-It's also possible to treat bytes as a Latin-1 encoded string. [`Data.ByteString.Char8`][Data.ByteString.Char8] and [`Data.ByteString.Lazy.Char8`][Data.ByteString.Lazy.Char8] modules re-export the same bytestring types (so you don't need to convert between `Data.ByteString.ByteString` and `Data.ByteString.Char8.ByteString` types) and provide functions to see `ByteString` as a list of `Char`s.
+It's also possible to treat bytes as characters. [`Data.ByteString.Char8`][Data.ByteString.Char8] and [`Data.ByteString.Lazy.Char8`][Data.ByteString.Lazy.Char8] modules re-export the same bytestring types (so you don't need to convert between `Data.ByteString.ByteString` and `Data.ByteString.Char8.ByteString` types) and provide functions to see `ByteString` as a list of `Char`s.
 
 But you should be cautious because truncating is possible. For example, calling [`pack`][Data.ByteString.Char8.pack] on Unicode strings will truncate character codes and you definetely don't want this. You should use [`fromString`](https://hackage.haskell.org/package/utf8-string/docs/Data-ByteString-UTF8.html#v:fromString) and [`toString`](https://hackage.haskell.org/package/utf8-string/docs/Data-ByteString-UTF8.html#v:toString) functions from [`utf8-string`](https://hackage.haskell.org/package/utf8-string) module instead.
 
