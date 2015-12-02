@@ -68,7 +68,7 @@ I want to have more power at compile-time. There are too many things you can't d
 
 The other minor thing I miss is C's arrow operator. Rust's auto-dereferencing rules doesn't work for raw pointers, so I end up writing things like `(*prev_block).size += (*block).size` instead of `prev_block.size += block.size` or C's `prev_block->size += block->size`. That's a minor thing but it annoys when you're dealing with lots of raw pointers.
 
-I haven't expected, but the other annoying thing is strong typing, I have lots of casting back and forth between usize, isize and u16 and it gets really annoying sometimes. I by no means want to change this, just expressing my woes; I still think strong typing is a thing and I can leave with some extra explicit type casts.
+I haven't expected, but the other annoying thing is strong typing, I have lots of casting back and forth between usize, isize and u16 and it gets really annoying sometimes. I by no means want to change this, just expressing my woes; I still think strong typing is a thing and I can live with some extra explicit type casts.
 
 ## Any strange debug stories?
 
