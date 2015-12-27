@@ -60,7 +60,7 @@ I want to have more power at compile-time. There are too many things you can't d
 
 - You can't have size of type at compile-time.
 
-    Currently, I just call a function every time I need size of type. This has no performance cost as compiler inlines eveything, but that bloats the code and makes it less readable (and less writable as well).
+    Currently, I just call a function every time I need size of type. This has no performance cost as compiler inlines everything, but that bloats the code and makes it less readable (and less writable as well).
 
 - Ok, there is almost nothing you can do at compile-time.
 
