@@ -6,11 +6,11 @@ keywords: awesome wm,awesome,skype,fix,size
 description: How to fix skype size under awesome wm.
 ---
 
-By default, skype behaves strangely under awesome wm. For example, view profile window is so small that even name isn't displayed.
+By default, Skype behaves strangely under awesome wm. For example, view profile window is so small that even name isn't displayed.
 
 <img src="/images/skype_profile_under_awesome.png" alt="skyper profile bug" />
 
-Yes, that's skype profile at the middle.
+Yes, that's Skype profile in the middle.
 
 <!--more-->
 
@@ -25,12 +25,12 @@ WM_NORMAL_HINTS(WM_SIZE_HINTS):
         window gravity: NorthWest
 ```
 
-The window maximus size is smaller than minimum one. That's why it's impossible to resize skype profile window.
+The window's maximum size is smaller than minimum one. That's why it's impossible to resize Skype profile window.
 
-Another problem is that skype chat window's minimal size is big enough to go beyond the boundaries of my second screen when two or more windows are open.
+Another problem is that Skype chat window's minimal size is big enough to go beyond the boundaries of my second screen when two or more windows are open.
 
 ### Fix
-Both problems are fixed at once with adding proper rule to your _rc.lua_.
+Both problems are fixed at once with adding the proper rule to your _rc.lua_:
 
 ```lua
 awful.rules.rules = {
@@ -46,6 +46,6 @@ awful.rules.rules = {
 }
 ```
 
-`size_hints_honor = false` specifies that awesome should ignore program-specified minimum and maximum window sizes. After that, skype works just great.
+`size_hints_honor = false` specifies that awesome should ignore program-specified minimum and maximum window sizes. After that, Skype works just great.
 
 <img src="/images/skype_profile_fixed.png" class="img-responsive" />

@@ -6,7 +6,7 @@ keywords: haskell,io,command,pattern
 description: How to understand IO if you know command pattern.
 ---
 
-In this post I'll try to give some intuition behind IO in Haskell for people who know what [command pattern](https://en.wikipedia.org/wiki/Command_pattern) is, without explaining what [M-word](https://wiki.haskell.org/Monad) or [do-notation](https://en.wikibooks.org/wiki/Haskell/do_notation) is.
+In this post, I'll try to give some intuition behind IO in Haskell for people who know what [command pattern](https://en.wikipedia.org/wiki/Command_pattern) is, without explaining what [M-word](https://wiki.haskell.org/Monad) or [do-notation](https://en.wikibooks.org/wiki/Haskell/do_notation) is.
 
 <!--more-->
 
@@ -91,7 +91,7 @@ public interface Command<T> {
 
 `then` takes additional command and returns a new command which, when executed, executes `this` command and then executes the second command and return its result. This method is Haskell's `(>>) :: IO a -> IO b -> IO b`.
 
-`bind` takes a function from `T` to a new command and return a command which, when executed, executes the `this` command and passes its result to the function and executes final command. This function is Haskell's `(>>=) :: IO a -> (a -> IO b) -> IO b`.
+`bind` takes a function from `T` to a new command and returns a command which, when executed, executes the `this` command and passes its result to the function and executes the final command. This function is Haskell's `(>>=) :: IO a -> (a -> IO b) -> IO b`.
 
 Let's write a "real-world" application with that.
 
@@ -147,16 +147,16 @@ main = do
     return (2015 - read year)
 ```
 
-Haskell has a special [do-notation](https://en.wikibooks.org/wiki/Haskell/do_notation). In fact, it's just a syntactic sugar for `>>`, `>>=` and lambdas. So the last program is the same as previous one.
+Haskell has a special [do-notation](https://en.wikibooks.org/wiki/Haskell/do_notation). In fact, it's just syntactic sugar for `>>`, `>>=` and lambdas. So the last program is the same as previous one.
 
-Now you should notice that the whole Haskell program is one big command and there is no `execute` in Haskell &mdash; all programs should be composed of primitive commands provided by the base library.
+Now you should notice that the whole Haskell program is one big command and there is no `execute` in Haskell---all programs should be composed of primitive commands provided by the base library.
 
-That's how Haskell keeps things pure. Think! Your whole program is just a command &mdash; a recipe that describes what program should do. `putStrLn` is a pure(!) function that returns command (which in turn knows what to print on screen). `getLine` is a constant(!) value &mdash; a command; you're not performing I/O when you type `name <- getLine`.
+That's how Haskell keeps things pure. Think! Your whole program is just a command---a recipe that describes what program should do. `putStrLn` is a pure(!) function that returns command (which in turn knows what to print on screen). `getLine` is a constant(!) value---a command; you're not performing I/O when you type `name <- getLine`.
 
 ## Conclusion
 
-- IO is a free command pattern in Haskell; you can pass `IO` values around as any other values.
+- IO is a free command pattern in Haskell; you can pass `IO` values around like any other values.
 - All functions in Haskell are pure;
-- `do` is not a hack for doing I/O; it's just a syntactic sugar;
+- `do` is not a hack for doing I/O; it's just syntactic sugar;
 
 *P.S. Note that `>>`, `>>=`, `return` and do-notation are not unique to `IO` and I lied about their types. They all work for any [Monad](https://wiki.haskell.org/Monad), not just `IO`.*

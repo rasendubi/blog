@@ -8,29 +8,29 @@ description: I'm writing an operating system in Rust and here is my status and i
 
 ***TL;DR** I'm writing an operating system in [Rust](https://www.rust-lang.org/) and here is my status and impressions after a month of development.*
 
-I've been developing embedded operating systems for living for a couple of years now. And... I got tired of work, all the bureaucracy, hard to debug issues, a zillion of low-level details; I wasn't even sure I want to continue work in the field, so I started a side project. It may come as a surprise I started yet another operating system when exactly the same thing led me to this. Well, it's not same; I'm building a new operating system to experiment and this actually refuels me with passion to the field.
+I've been developing embedded operating systems for living for a couple of years now. And... I got tired of work, all the bureaucracy, hard to debug issues, a zillion of low-level details; I wasn't even sure I want to continue work in the field, so I started a side project. It may come as a surprise I started yet another operating system when the same thing led me to this. Well, it's not same; I'm building a new operating system to experiment, and this refuels me with the passion to the field.
 
-Here is my progress and some impressions of Rust after a month of development (the code is [here](https://github.com/rasendubi/bkernel)).
+Here are my progress and some impressions of Rust after a month of development (the code is [here](https://github.com/rasendubi/bkernel)).
 
 <!--more-->
 
 ## Why Rust?
 
-All started with [Idris](http://www.idris-lang.org/). It has an extremely great type system, especially effects system, so I though it would be interesting to apply it to operating system development. Unfortunately, Idris requires massive runtime and GC, so it's not an option.
+All started with [Idris](http://www.idris-lang.org/). It has an extremely great type system, especially effects system, so I thought it would be interesting to apply it to operating system development. Unfortunately, Idris requires massive runtime and GC, so it's not an option.
 
-I've explored what new languages suitable for kernel programming are there. I settled on two: [Nim](http://nim-lang.org/) and [Rust](https://www.rust-lang.org/). In fact, I chose Nim because it has simple effects system, optional GC and [really interesting pragmas](http://nim-lang.org/docs/manual.html#pragmas). I even finished [a hello world kernel in Nim](https://github.com/rasendubi/bkernel/commit/bb8079a5990f0762c0d16b1726a5a1d25b05de0a), but it turned out [Nim's volatile pragma is broken](https://github.com/nim-lang/Nim/issues/3382). This is the end of story &mdash; you can't develop a kernel without a volatile (well, you can but that will turn out abysmal pain at some point).
+I've explored what new languages suitable for kernel programming are there. I settled on two: [Nim](http://nim-lang.org/) and [Rust](https://www.rust-lang.org/). In fact, I chose Nim because it has simple effects system, optional GC, and [fascinating pragmas](http://nim-lang.org/docs/manual.html#pragmas). I even finished [a hello world kernel in Nim](https://github.com/rasendubi/bkernel/commit/bb8079a5990f0762c0d16b1726a5a1d25b05de0a), but it turned out [Nim's volatile pragma is broken](https://github.com/nim-lang/Nim/issues/3382). End of story---you can't develop a kernel without a volatile (well, you can, but that will turn out deep pain at some point).
 
 So, I'm here developing an operating system in Rust.
 
 ## How is it going?
 
-Now I have a basic USART, GPIO and LED drivers, a simple terminal with a couple of commands and I'm running on [a real board](http://www.st.com/web/catalog/tools/FM116/SC959/SS1532/PF252419?sc=internet/evalboard/product/252419.jsp). There is a good documentation and tests for most parts, build system, a [Travis](https://travis-ci.org/) setup (though, the latest update to cargo-0.7.0 [broke my documentation generation](https://github.com/rust-lang/cargo/issues/2175), but I'm running nightly &mdash; what I expected).
+Now I have a basic USART, GPIO and LED drivers, a dumb terminal with a couple of commands, and I'm running on [a real board](http://www.st.com/web/catalog/tools/FM116/SC959/SS1532/PF252419?sc=internet/evalboard/product/252419.jsp). There are a good documentation and tests for most parts, build system, a [Travis](https://travis-ci.org/) setup (though, the latest update to cargo-0.7.0 [broke my documentation generation](https://github.com/rust-lang/cargo/issues/2175), but I'm running nightly---what I expected).
 
-I have a crazy idea for system architecture and want to try it out, but I need a memory allocator first. So that's what I'm working on now. In fact I've been working on it more than on other parts taken together. It deserves a separate post and I hope to write it when I finish the allocator.
+I have a crazy idea for system architecture and want to try it out, but I need a memory allocator first. So that's what I'm working on now. In fact, I've been working on it more than on other parts taken together. It deserves a separate post, and I hope to write it when I finish the allocator.
 
 ## What are your impressions of Rust?
 
-I like the language; I like a good type system and strong emphasis on safety. The generated machine code is well-optimized (yeah, I've looked through it). There are few features I miss but I hope some will be added in future (feel myself in the front line of future Rust kernel developers).
+I like the language; I like a good type system and the strong emphasis on safety. The generated machine code is well-optimized (yeah, I've looked through it). There are few features I miss, but I hope some will be added in future (feel myself on the front line of future Rust kernel developers).
 
 I want to have more power at compile-time. There are too many things you can't do at compile-time. From top of my head:
 
@@ -58,17 +58,17 @@ I want to have more power at compile-time. There are too many things you can't d
 
     This way, you can use `GPIO_A` as if it were a real reference.
 
-- You can't have size of type at compile-time.
+- You can't have a size of type at compile-time.
 
-    Currently, I just call a function every time I need size of type. This has no performance cost as compiler inlines everything, but that bloats the code and makes it less readable (and less writable as well).
+    Currently, I just call a function every time I need the size of type. That has no performance cost as compiler inlines everything, but that bloats the code and makes it less readable (and less writable as well).
 
 - Ok, there is almost nothing you can do at compile-time.
 
     There is a [`const_fn` feature](https://github.com/rust-lang/rfcs/blob/master/text/0911-const-fn.md) that should change the game, but it's not quite there yet.
 
-The other minor thing I miss is C's arrow operator. Rust's auto-dereferencing rules doesn't work for raw pointers, so I end up writing things like `(*prev_block).size += (*block).size` instead of `prev_block.size += block.size` or C's `prev_block->size += block->size`. That's a minor thing but it annoys when you're dealing with lots of raw pointers.
+The other minor thing I miss is C's arrow operator. Rust's auto-dereferencing rules don't work for raw pointers, so I end up writing things like `(*prev_block).size += (*block).size` instead of `prev_block.size += block.size` or C's `prev_block->size += block->size`. That's a minor thing, but it annoys when you're dealing with lots of raw pointers.
 
-I haven't expected, but the other annoying thing is strong typing, I have lots of casting back and forth between usize, isize and u16 and it gets really annoying sometimes. I by no means want to change this, just expressing my woes; I still think strong typing is a thing and I can live with some extra explicit type casts.
+I haven't expected, but the other annoying thing is strong typing, I have lots of casting back and forth between `usize`, `isize`, and `u16`, and it gets annoying sometimes. I by no means want to change this, just expressing my woes; I still think strong typing is a thing, and I can live with some extra explicit type casts.
 
 ## Any strange debug stories?
 
@@ -117,18 +117,18 @@ while c != '\r' as u32 {
 }
 ```
 
-Just wrap a couple of statements in `if`. Now the funny part: that increased the size of image from 1.5 Kb to 3.5 Kb. Yeah, 1 extra line of code resulted in 2 additional kbytes of ROM. That's more than all my other code taken together at that moment.
+Just wrap a couple of statements in `if`. Now the funny part: that increased the size of the image from 1.5 Kb to 3.5 Kb. Yeah, one extra line of code resulted in 2 additional kbytes of ROM. That's more than all my other code taken together at that moment.
 
-*"What could happen? That's just an innocent line of code. It doesn't really do anything!"*, you think. Well, you know Rust inserts a bounds-checking for array accesses. Compiler was smart enough to eliminate them in first case, but adding a condition broke analysis, so bound-checks got inserted in machine code in the second case.
+*"What could happen? That's just an innocent line of code. It doesn't do anything!"*, you think. Well, you know Rust inserts a bounds-checking for array accesses. The compiler was smart enough to eliminate them in the first case, but adding a condition broke analysis, so bound-checks got inserted into machine code in the second case.
 
-*"Okay... But wait a minute! Bound check is just a couple of instructions. How they could possibly double the size of image?"*. Yes, bound check isn't that expensive, but... in case index is wrong, it calls panic with message that includes array length and index. This in turn requires the code for formatting strings, which takes several kbytes. That was the real reason.
+*"Okay... But wait a minute! A bound check is just a couple of instructions. How they could double the size of the image?"* Yes, a bound check isn't that expensive, but... in case index is wrong, it calls panic with a message that includes array length and index. That, in turn, requires the code for formatting strings, which takes several kbytes. That was the real reason.
 
-*"Maybe, you could just turn bounds checking off"*. I would be glad, but bounds checking is not optional ([and won't ever be](http://thread.gmane.org/gmane.comp.lang.rust.devel/9133/), as far as I understand). I know about [`get_unchecked_mut`](https://doc.rust-lang.org/std/primitive.slice.html#method.get_unchecked_mut), but case-wise solution is not an option here: if I ever use a checked indexing, I'll return to the same state. Furthermore, I don't have anything against bound checking itself.
+*"Maybe, you could just turn bounds checking off."* I would be glad, but bounds checking is not optional ([and won't ever be](http://thread.gmane.org/gmane.comp.lang.rust.devel/9133/), as far as I understand). I know about [`get_unchecked_mut`](https://doc.rust-lang.org/std/primitive.slice.html#method.get_unchecked_mut), but a case-wise solution is not an option here: if I ever use a checked indexing, I'll return to the same state. Furthermore, I don't have anything against bound checking itself.
 
-*"Oh... well. What did you do then?"*. I was thinking of [patching libcore](https://internals.rust-lang.org/t/disabling-panic-handling/1834/7) to remove formatting from panicking and fail without any message. I even did this locally and that restored normal size. But then I though that I'll need a formatting code in future anyway and having error messages is really helpful; so I've implemented proper panic handling instead. That further increased image size to 6 Kb, but that's not a big deal.
+*"Oh... well. What did you do then?"* I was thinking of [patching libcore](https://internals.rust-lang.org/t/disabling-panic-handling/1834/7) to remove formatting from panicking and fail without any message. I even did this locally, and that restored normal size. But then I though that I'll need a formatting code in future anyway and having error messages is really helpful; so I've implemented proper panic handling instead. That further increased image size to 6 Kb, but that's not a big deal.
 
 ## Conclusion and plans
 
-I like Rust; there are rough edges but I see a good trend. I hope to finish my allocator soon and start developing general framework for drivers and everything.
+I like Rust; there are rough edges but I see a good trend. I hope to finish my allocator soon and start developing a general framework for drivers and everything.
 
 What was your first Rust project? How did it go?

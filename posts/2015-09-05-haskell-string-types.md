@@ -10,7 +10,7 @@ The goal of this blog post is to ease the confusion of Haskell string types. I a
 
 <!--more-->
 
-***Note:*** It's a second edition of the blog post. You can find the first one on [github](https://github.com/rasendubi/blog/blob/2c52a3ed541c8a8a0b514b66816fd03d92919f7c/posts/2015-09-05-haskell-string-types.md) 
+***Note:*** It's a second edition of the blog post. You can find the first one on [GitHub](https://github.com/rasendubi/blog/blob/2c52a3ed541c8a8a0b514b66816fd03d92919f7c/posts/2015-09-05-haskell-string-types.md) 
 
 ## String
 
@@ -20,7 +20,7 @@ As you all know, `String` is just a type synonym for list of `Char`s:
 type String = [Char]
 ```
 
-This is good because you can use all functions for list manipulations on `String`s. The bad news is that storing such strings implies massive overhead, [up to 4 words per character](https://wiki.haskell.org/GHC/Memory_Footprint) and size of `Char` itself is 2 words. This also strikes speed.
+That is good because you can use all functions for list manipulations on `String`s. The bad news is that storing such strings implies massive overhead, [up to 4 words per character](https://wiki.haskell.org/GHC/Memory_Footprint) and size of `Char` itself is 2 words. This also strikes speed.
 
 To see why overhead is so high, check [slide 43](http://image.slidesharecdn.com/slides-100930074853-phpapp01/95/highperformance-haskell-43-728.jpg) from Johan Tibell's [High-Performance Haskell](http://www.slideshare.net/tibbe/highperformance-haskell) presentation.
 
@@ -32,11 +32,11 @@ That's why we have `Text`.
 
 To convert between `String` and `Text` you can use [`pack`][Data.Text.pack] and [`unpack`][Data.Text.unpack] from [`Data.Text`][Data.Text] module.
 
-The [`Data.Text`][Data.Text] module also provides many functions to work with `Text` and mimics the list interface. It also provides a full-string [case conversion][text case conversion] functions (`map toUpper` doesn't work for Unicode because result could have different length). The module is intended to be imported qualified. There are also I/O functions in [`Data.Text.IO`][Data.Text.IO] module.
+The [`Data.Text`][Data.Text] module also provides many functions to work with `Text` and mimics the list interface. It also provides a full-string [case conversion][text case conversion] functions (`map toUpper` doesn't work for Unicode because the result could have a different length). The module is intended to be imported qualified. There are also I/O functions in [`Data.Text.IO`][Data.Text.IO] module.
 
-The downside of storing the string in a strict array is that way it forces the whole string to be in memory at the same time, which negates lazy I/O (when you call [`readFile`][Data.Text.IO.readFile], it reads whole file in the memory before starting processing). That's why the library provides the second string type: [`Data.Text.Lazy.Text`][Data.Text.Lazy.Text]. It uses a lazy list of strict chunks, so this type is suitable for I/O streaming.
+The downside of storing the string in a strict array is that way it forces the whole string to be in memory at the same time, which negates lazy I/O (when you call [`readFile`][Data.Text.IO.readFile], it reads the whole file in the memory before starting processing). That's why the library provides the second string type: [`Data.Text.Lazy.Text`][Data.Text.Lazy.Text]. It uses a lazy list of strict chunks, so this type is suitable for I/O streaming.
 
-You can think of lazy `Text` as `[Data.Text.Text]`. In fact there are [`toChunks`][Data.Text.Lazy.toChunks] and [`fromChunks`][Data.Text.Lazy.fromChunks] functions that convert lazy `Text` to/from a list of strict `Text`.
+You can think of lazy `Text` as `[Data.Text.Text]`. In fact, there are [`toChunks`][Data.Text.Lazy.toChunks] and [`fromChunks`][Data.Text.Lazy.fromChunks] functions that convert lazy `Text` to/from a list of strict `Text`.
 
 The [`Data.Text.Lazy`][Data.Text.Lazy] module copies the interface of `Data.Text` module but for lazy `Text`. To convert between strict and lazy `Text`, use [`toStrict`][Data.Text.Lazy.toStrict] and [`fromStrict`][Data.Text.Lazy.fromStrict] functions.
 
@@ -57,15 +57,15 @@ The [`Data.Text.Lazy`][Data.Text.Lazy] module copies the interface of `Data.Text
 
 ## ByteString
 
-There is also a type you will see often called `ByteString`. The funny thing is that it's not intended to be a string. The `ByteString` type is an array of bytes that comes in both strict and lazy forms; it's really good for serialization and passing data between C and Haskell. It may be a bit faster than `Text` for some operations because `Text` does more work to handle Unicode properly.
+There is also a type you will see often called `ByteString`. The funny thing is that it's not intended to be a string. The `ByteString` type is an array of bytes that comes in both strict and lazy forms; it's great for serialization and passing data between C and Haskell. It may be a bit faster than `Text` for some operations because `Text` does more work to handle Unicode properly.
 
-Generally, you shouldn't use this type for text manipulation as it doesn't support Unicode. But you should know how to deal with `ByteString`s because it's *de facto* standard type for networking, serialization and parsing in Haskell.
+Generally, you shouldn't use this type for text manipulation as it doesn't support Unicode. But you should know how to deal with `ByteString`s because it's *de facto* standard type for networking, serialization, and parsing in Haskell.
 
 The standard view into `ByteString` types represent elements as `Word8`. [`Data.ByteString`][Data.ByteString] and [`Data.ByteString.Lazy`][Data.ByteString.Lazy] modules provide functions that mimic `[Word8]` interface.
 
 It's also possible to treat bytes as characters. [`Data.ByteString.Char8`][Data.ByteString.Char8] and [`Data.ByteString.Lazy.Char8`][Data.ByteString.Lazy.Char8] modules re-export the same bytestring types (so you don't need to convert between `Data.ByteString.ByteString` and `Data.ByteString.Char8.ByteString` types) and provide functions to see `ByteString` as a list of `Char`s.
 
-But you should be cautious because truncating is possible. For example, calling [`pack`][Data.ByteString.Char8.pack] on Unicode strings will truncate character codes and you definetely don't want this. You should use [`fromString`](https://hackage.haskell.org/package/utf8-string/docs/Data-ByteString-UTF8.html#v:fromString) and [`toString`](https://hackage.haskell.org/package/utf8-string/docs/Data-ByteString-UTF8.html#v:toString) functions from [`utf8-string`](https://hackage.haskell.org/package/utf8-string) module instead.
+But you should be cautious because truncating is possible. For example, calling [`pack`][Data.ByteString.Char8.pack] on Unicode strings will truncate character codes and you definitely don't want this. You should use [`fromString`](https://hackage.haskell.org/package/utf8-string/docs/Data-ByteString-UTF8.html#v:fromString) and [`toString`](https://hackage.haskell.org/package/utf8-string/docs/Data-ByteString-UTF8.html#v:toString) functions from the [`utf8-string`](https://hackage.haskell.org/package/utf8-string) module instead.
 
 ```haskell
 Prelude> import qualified Data.ByteString.Char8 as BS
@@ -101,7 +101,7 @@ Prelude T> T.pack "hello"
 "hello"
 ```
 
-But that's really tiresome to type all these conversion functions all over again, especially when number of strings in the code is high.
+But that's really tiresome to type all these conversion functions all over again, especially when the number of strings in the code is high.
 
 The other possible solution is to enable `OverloadedStrings` language pragma. You can place `{-# LANGUAGE OverloadedStrings #-}` in your source code to start.
 
@@ -154,4 +154,4 @@ That's basically all you should know to start working with strings.
 - [`text-icu`](http://hackage.haskell.org/package/text-icu) library for more Unicode features, encodings, normalization and regular expressions;
 - [`bytestring`](http://hackage.haskell.org/package/bytestring) library;
 - [`utf8-string`](https://hackage.haskell.org/package/utf8-string) library;
-- [`ListLike`](http://hackage.haskell.org/package/ListLike) package for common interface to all strings.
+- [`ListLike`](http://hackage.haskell.org/package/ListLike) package for a common interface to all strings.

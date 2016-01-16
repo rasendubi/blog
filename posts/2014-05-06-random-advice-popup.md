@@ -6,16 +6,16 @@ keywords: tips,advice,popup,cron
 description: Display random advice every hour
 ---
 
-Long time ago, I have read a book [The Pragmatic Programmer: From Journeyman to Master](http://pragprog.com/the-pragmatic-programmer) (if someone didn't read it yet, I highly recommend it). This book is a collection of extremely useful tips for programmers. But this post is not about the book.
+A long time ago, I had read a book [The Pragmatic Programmer: From Journeyman to Master](http://pragprog.com/the-pragmatic-programmer) (if someone didn't read it yet, I highly recommend it). This book is a collection of extremely useful tips for programmers. But this post is not about the book.
 
-Recently I decided to revisit these tips again; and found that I don't remember some of them. So that, I decided to create something that will constantly remind me about them. The best choice was on-screen popups showing one tip at a time.
+Recently I decided to revisit these tips again; and found that I don't remember some of them. So that, I decided to create something that will regularly remind me of them. The best choice was on-screen popups showing one tip at a time.
 
 <img style="display: block; margin-left: auto; margin-right: auto" src="/images/random-advice-popup.png" alt="random advice" />
 
 The pros are:
 
 - it's fairly easy to create on-screen popup;
-- it doesn't require some action from me; so, I can miss it, if I so wish.
+- it doesn't require some action from me; so, I can miss it if I so wish.
 
 <!--more-->
 
@@ -41,7 +41,7 @@ Let's examine script one piece at a time:
 5. `xargs -0 notify-send "$CAPTION"` displays final line inside the on-screen notification.
 
 ### Running script regularly
-After that, I executed `crontab -e` and create user cron job by adding the following line:
+After that, I executed `crontab -e` and created user cron job by adding the following line:
 
 ```cron
 0 * * * * /home/rasen/random-advice.sh
@@ -49,12 +49,12 @@ After that, I executed `crontab -e` and create user cron job by adding the follo
 
 That's a cron rule to run specified script every hour.
 
-After that, an popup will appear every hour displaying one tip.
+After that, a popup will appear every hour displaying one tip.
 
 #### Other option
-If you don't have or don't want utilize cron, you are free to select any alternative that will execute script at given interval.
+If you don't have or don't want to utilize cron, you are free to select any alternative that will execute the script at given interval.
 
-For example, you may run script manually inside the infinite loop:
+For example, you may run the script manually inside the infinite loop:
 
 ```zsh
 while true ;do
@@ -62,6 +62,6 @@ while true ;do
 done
 ```
 
-As another alternative, you may use [systemd's events](https://wiki.archlinux.org/index.php/Systemd/cron_functionality) (remember to run script under your user).
+As another alternative, you may use [systemd's events](https://wiki.archlinux.org/index.php/Systemd/cron_functionality) (remember to run the script under your user).
 
 Bonus: [Pragmatic Programmer tips in the text file](/files/pragmatic-programmer.txt)

@@ -6,7 +6,7 @@ keywords: proguard,example,java,obfuscation
 description: A non-trivial real-world example of ProGuard usage.
 ---
 
-[ProGuard](http://proguard.sourceforge.net/index.html) is a free tool for shrinking, optimizing and obfuscating jar files. I've used it at work to protect a commercial application from decompilation, especially critical algorithms (unlike machine code, Java bytecode is easy to decompile).
+[ProGuard](http://proguard.sourceforge.net/index.html) is a free tool for shrinking, optimizing and obfuscating jar files. I've used it at work to protect a commercial application from decompilation, especially critical algorithms. (Unlike machine code, Java bytecode is easy to decompile.)
 
 Here I'll try to describe how I did that.
 
@@ -14,7 +14,7 @@ Here I'll try to describe how I did that.
 
 ### Step 1. Gathering your jars
 
-The final application consists from many modules. The first step is to gather ones developed by our company into single big jar that will be processed by ProGuard.
+The final application consists of many modules. The first step is to pick ones developed by our company into a single big jar that will be processed by ProGuard.
 
 While obfuscating each module separately, you should keep module's public API untouched so that another module can find necessary classes by name. Processing all modules in one go removes that restriction.
 
@@ -40,7 +40,7 @@ This step is done with maven-shade-plugin. Add the following to your pom.xml:
                     </includes>
 
                     <!--
-                        maven-shade-plugin experiences issues shading dlls.
+                        maven-shade-plugin experiences issues shading DLLs.
                         Unfortunately, our application has several.
                         You could also place some modules you don't want obfuscate.
                     -->
@@ -67,7 +67,7 @@ Note: If you're going to provide your jar packed with all dependencies, remember
 
 ### Step 2. Obfuscating
 
-After we generated our monster jar, it's time to do actual job. Luckily, there is maven plugin for ProGuard.
+After we generated our monster jar, it's time to do the actual job. Luckily, there is maven plugin for ProGuard.
 
 Add the following to your pom.xml __after__ maven-shade-plugin:
 
@@ -89,7 +89,7 @@ Add the following to your pom.xml __after__ maven-shade-plugin:
         <proguardInclude>${basedir}/proguard.conf</proguardInclude>
 
         <!-- Now exclude all modules that are embedded in the jar, so that
-            ProGuard won't see redefinition of each single class.
+            ProGuard won't see a redefinition of each single class.
             You don't have to write down your main module. -->
         <exclusions>
             <exclusion>
@@ -103,7 +103,7 @@ Add the following to your pom.xml __after__ maven-shade-plugin:
         <!--
             List external jars your application depends on
             (that not listed in maven dependencies).
-            You probably depend on jave runtime (rt.jar).
+            You probably depend on Java runtime (rt.jar).
 
             JCE stands for Java Cryptography Extension.
             You probably don't need it, but my application does.
@@ -127,7 +127,7 @@ Then add the following proguard.conf:
     public static void main(java.lang.String[]);
 }
 
-# Supress warnings from javax.servlet
+# Suppress warnings from javax.servlet
 -dontwarn javax.servlet.**
 
 # Uncomment if you want to have more meaningful backtraces
@@ -136,25 +136,25 @@ Then add the following proguard.conf:
 # -keepattributes SourceFile,LineNumberTable
 ```
 
-This configuration should at least make ProGuard do its job and obfuscate your application. If you're lucky enough and your application works fine &mdash; congratulations, you're done! Go to step 4 now. Otherwise, welcome to the next section.
+This configuration should, at least, make ProGuard do its job and obfuscate your application. If you're lucky enough, and your application works fine---congratulations, you're done! Go to step 4 now. Otherwise, welcome to the next section.
 
 ### Step 3. Fixing application
 
 Most probably, your application now crashes with very strange errors. Don't worry, I'll try to fix that now.
 
-From this point on you should read [ProGuard manual](http://proguard.sourceforge.net/manual/usage.html) for description of options.
+From this point on you should read [ProGuard manual](http://proguard.sourceforge.net/manual/usage.html) for the description of options.
 
 #### Reflection
 
-The number one trouble for obfuscation is reflection. To load class dynamically by name you should know its name after obfuscation, otherwise jre couldn't find class for given name. The same applies for dynamically calling methods.
+The number one trouble for obfuscation is a reflection. To load a class dynamically by name you should know its name after obfuscation; otherwise, jre couldn't find a class for given name. The same applies to dynamically calling methods.
 
-The first option &mdash; don't obfuscate dynamically loaded classes' names. What can be easily? Name after processing equals to name before processing. End of story.
+The first option---don't obfuscate dynamically loaded classes' names. What could be simpler? Name after processing equals to name before processing. End of story.
 
-Unfortunately, this is not an option for my application. The most critical part is loaded dynamically and forms complex structure in form described in almost one thousand xml files.
+Unfortunately, this is not an option for my application. The most critical part is loaded dynamically and forms a complex structure in the form described in almost one thousand XML files.
 
 So, what's the solution? Obfuscate all occurrences of class names!
 
-ProGuard has an option for that, but it requires all names to be fully qualified. Fortunately, adapting all xml files opened a way to delete some classes that was copied just to bring them in scope and removed over 21,000 lines.
+ProGuard has an option for that, but it requires all names to be fully-qualified. Fortunately, adapting all XML files opened a way to delete some classes that were copied just to bring them in scope and removed over 21,000 lines.
 
 After that I added the following to proguard.conf:
 
@@ -172,19 +172,19 @@ After that I added the following to proguard.conf:
 
 ##### Wrong solution
 
-I'm not the first programmer who obfuscated our application. The previous one made a horrible terrifying mistake and I don't want you to make the same one.
+I'm not the first programmer who obfuscated our application. The previous one made a horrible, terrifying mistake and I don't want you to make the same one.
 
-In order to resolve obfuscated names at runtime, he brought whole obfuscation map (in form of two files that should be xor'ed) in final jar, made special class for resolving original names to obfuscated ones.
+To resolve obfuscated names at runtime, he brought whole obfuscation map (in the form of two files that should be xor'ed) in the final jar, made a special class for resolving original names to obfuscated ones.
 
-In that way he made this single class the most important link of the anti-decompilation chain.
+In that way, he made this single class the most important link in the anti-decompilation chain.
 
 Don't do that!
 
 #### Resource names
 
-Because class' full name probably changed, loading resources relative to class' path will fail.
+Because class's full name probably changed, loading resources relative to class's path will fail.
 
-To fix that, just relocate resource to appropriate place.
+To fix that, just relocate resource to the appropriate place.
 
 ```proguard
 -adaptresourcefilenames
@@ -192,7 +192,7 @@ To fix that, just relocate resource to appropriate place.
 
 #### Native methods
 
-The issue with native methods is essentially the same as with reflection. Java relies on C function to contain class name, while accessing class fields from C also assumes knowing their names.
+The issue with native methods is essentially the same as with reflection. Java relies on C function to contain the class name while accessing class fields from C also assumes knowing their names.
 
 While this is theoretically possible to make the necessary transformation of C source code after obfuscation and recompile library, it's not practical. So, the best solution is just to keep all stuff in classes with native methods unobfuscated.
 
@@ -210,7 +210,7 @@ While this is theoretically possible to make the necessary transformation of C s
 
 ### Step 4. Enabling more obfuscation
 
-At this point you should have your application up and running. It's best time to enable some more obfuscations!
+At this point, you should have your application up and running. It's the best time to enable some more obfuscations!
 
 ```proguard
 # This option removes all package names.
@@ -224,9 +224,9 @@ At this point you should have your application up and running. It's best time to
 
 ### P.S. Optimizing optimization
 
-Everything was working fine for a while, but after a couple of weeks processing started to take enormous amount of time (Jenkins build aborted after 17 hrs building).
+Everything was working fine for a while, but after a couple of weeks, processing started to take an enormous amount of time (Jenkins build aborted after 17 hrs building).
 
-After investigation I managed to shrink processing time down to 1 minute by disabling single optimization! Please welcome!
+After the investigation, I managed to shrink processing time down to 1 minute by disabling single optimization! Please welcome!
 
 ```proguard
 -optimizations !code/allocation/variable
