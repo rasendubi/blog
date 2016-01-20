@@ -78,7 +78,6 @@ main = hakyll $ do
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/add-title.html" defaultContext
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
-            >>= relativizeUrls
             >>= removeIndexHtml
 
     tags <- buildTags "posts/*" (fromCapture "tags/*/index.html")

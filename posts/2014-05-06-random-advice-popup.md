@@ -10,14 +10,14 @@ A long time ago, I had read a book [The Pragmatic Programmer: From Journeyman to
 
 Recently I decided to revisit these tips again; and found that I don't remember some of them. So that, I decided to create something that will regularly remind me of them. The best choice was on-screen popups showing one tip at a time.
 
+<!--more-->
+
 <img style="display: block; margin-left: auto; margin-right: auto" src="/images/random-advice-popup.png" alt="random advice" />
 
 The pros are:
 
 - it's fairly easy to create on-screen popup;
 - it doesn't require some action from me; so, I can miss it if I so wish.
-
-<!--more-->
 
 ### Implementation
 I create [the following shell script](/files/random-advice.sh) and make it executable:

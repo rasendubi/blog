@@ -8,11 +8,11 @@ description: How to fix skype size under awesome wm.
 
 By default, Skype behaves strangely under awesome wm. For example, view profile window is so small that even name isn't displayed.
 
-<img src="/images/skype_profile_under_awesome.png" alt="skyper profile bug" />
+<!--more-->
+
+<img src="/images/skype_profile_under_awesome.png" alt="skype profile bug" />
 
 Yes, that's Skype profile in the middle.
-
-<!--more-->
 
 After investigation with __xprop__, the reason is pretty clear.
 

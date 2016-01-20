@@ -17,6 +17,8 @@ I've used the [clang_complete](http://https://github.com/Rip-Rip/clang_complete 
 - An OmniSharp-based completion engine for C#
 - An omnifunc-based completer that uses data from Vim's omnicomplete system to provide semantic completions for many other languages (Ruby, PHP, etc.).
 
+<!--more-->
+
 <img src="/images/ycm.gif" class="img-responsive" alt="YouCompleteMe" />
 
 Note that it's not necessary to press any keyboard shortcut to invoke a completion menu.
@@ -28,8 +30,6 @@ The third significant thing is diagnostic display feature (the little red X that
 YCM also provides semantic go-to-definition/declaration commands for C-family languages and Python.
 
 For the more detailed feature overview, visit an [YCM home page](http://valloric.github.io/YouCompleteMe/ "YouCompleteMe home page").
-
-<!--more-->
 
 ### Installation
 
