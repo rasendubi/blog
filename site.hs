@@ -14,6 +14,8 @@ import qualified Data.Map as M
 
 import Sitemap
 
+import qualified GHC.IO.Encoding as E
+
 sitemapConfig :: SitemapConfiguration
 sitemapConfig = def
     { sitemapBase = "http://www.alexeyshmalko.com/"
@@ -48,7 +50,8 @@ sitemapFilter' _ = True
 
 --------------------------------------------------------------------------------
 main :: IO ()
-main = hakyll $ do
+main = (E.setLocaleEncoding E.utf8 >>) $ hakyll $ do
+
     match ("images/**" .||. "files/**" .||. "favicon.ico") $ do
         route   idRoute
         compile copyFileCompiler
@@ -232,5 +235,3 @@ sitemapCtx conf = mconcat
     [ constField "root" (feedRoot conf)
     , defaultContext
     ]
-
-

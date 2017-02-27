@@ -1,5 +1,12 @@
+resolver: lts-4.1
+
+nix:
+  enable: true
+  packages:
+    - zlib
+    - gcc
+
 flags: {}
 packages:
 - '.'
 extra-deps: []
-resolver: lts-4.1
