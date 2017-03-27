@@ -39,7 +39,7 @@ I [continue](/2017/weekly-review-3/) reading about different email setups in Ema
 - **[MailServerOverview - Dovecot Wiki](https://wiki2.dovecot.org/MailServerOverview)**
 - **[dimitri/mbsync-el: Wrap calling mbsync in Emacs Lisp, with a gnus hook](https://github.com/dimitri/mbsync-el)**. I call mbsync from gnus [now](https://github.com/rasendubi/dotfiles/commit/f483db6cdd959130b443ef6d10b22a3004894ddb).
 - **[Leaving Gmail Behind](http://nullprogram.com/blog/2013/09/03/)**
-- **[Mutt with multiple accounts, mbsync, notmuch, GPG and sub-minute updates | French to English translator](https://lukespear.co.uk/mutt-multiple-accounts-mbsync-notmuch-gpg-and-sub-minute-updates)**
+- **[Mutt with multiple accounts, mbsync, notmuch, GPG and sub-minute updates](https://lukespear.co.uk/mutt-multiple-accounts-mbsync-notmuch-gpg-and-sub-minute-updates)**
 - **[Practical guide to use Gnus with Gmail](https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/gnus-guide-en.org)**
 - **[Emacs, Notmuch and Offlineimap](http://chrisdone.com/posts/emacs-mail)**
 - **[Migrating from offlineimap to mbsync for mu4e](http://pragmaticemacs.com/emacs/migrating-from-offlineimap-to-mbsync-for-mu4e/)**
