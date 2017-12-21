@@ -1,5 +1,5 @@
 $for(posts)$
-    <div class="row">
+    <div>
         <div class="caption">
             <h1 class="post-title"><a href="$url$">$title$</a></h1>
         </div>
@@ -7,6 +7,10 @@ $for(posts)$
             $date$
             $if(author)$
                 by $author$
+            $endif$
+            <br />
+            $if(tags)$
+            Tags: $tags$
             $endif$
         </div>
 

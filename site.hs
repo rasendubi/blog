@@ -25,12 +25,14 @@ sitemapConfig = def
     , sitemapFilter = sitemapFilter'
     }
 
+rewriteSitemap :: String -> String
 rewriteSitemap x
     | "index.html" `isSuffixOf` x = ('/' :) $ reverse $ drop 10 $ reverse x
     | otherwise = '/' : x
 
 changeFrequency :: String -> ChangeFrequency
 changeFrequency "index.html" = Daily
+changeFrequency "reviews/index.html" = Weekly
 changeFrequency "archive/index.html" = Daily
 changeFrequency "about-me/index.html" = Yearly
 changeFrequency "contact/index.html" = Yearly
@@ -38,6 +40,7 @@ changeFrequency x = Monthly
 
 priority :: String -> Double
 priority "index.html" = 1
+priority "reviews/index.html" = 0.7
 priority "archive/index.html" = 0.2
 priority "about-me/index.html" = 0.3
 priority "contact/index.html" = 0.3
@@ -83,7 +86,15 @@ main = (E.setLocaleEncoding E.utf8 >>) $ hakyll $ do
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= removeIndexHtml
 
-    tags <- buildTags "posts/*" (fromCapture "tags/*/index.html")
+    tags <- buildTags ("posts/*" .||. "reviews/*") (fromCapture "tags/*/index.html")
+    let postCtx = mconcat
+          [ dateField "date" "%B %e, %Y"
+          , teaserField "teaser" "content"
+          , tagsField "tags" tags
+          , postTitleCtx
+          , defaultContext
+          ]
+
     tagsRules tags $ \tag pattern -> do
         let title = "Posts tagged \"" ++ tag ++ "\""
         route idRoute
@@ -99,11 +110,21 @@ main = (E.setLocaleEncoding E.utf8 >>) $ hakyll $ do
                 >>= relativizeUrls
                 >>= removeIndexHtml
 
-    match "posts/*" $ do
-        route $ removePosts `composeRoutes` niceRoute `composeRoutes` groupByYear
+    match "posts/*.md" $ do
+        route $ removePrefix "posts/" `composeRoutes` niceRoute `composeRoutes` groupByYear
         compile $ pandocCompiler
             >>= saveSnapshot "content"
-            >>= loadAndApplyTemplate "templates/post.html" (tagsField "tags" tags `mappend` postCtx)
+            >>= loadAndApplyTemplate "templates/post.html" postCtx
+            >>= loadAndApplyTemplate "templates/add-title.html" defaultContext
+            >>= loadAndApplyTemplate "templates/default.html" postCtx
+            >>= relativizeUrls
+            >>= removeIndexHtml
+
+    match "reviews/*.md" $ do
+        route $ niceRoute `composeRoutes` groupByYear
+        compile $ pandocCompiler
+            >>= saveSnapshot "content"
+            >>= loadAndApplyTemplate "templates/post.html" postCtx
             >>= loadAndApplyTemplate "templates/add-title.html" defaultContext
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
@@ -112,7 +133,7 @@ main = (E.setLocaleEncoding E.utf8 >>) $ hakyll $ do
     create ["archive/index.html"] $ do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
+            posts <- recentFirst =<< loadAll ("posts/*" .||. "reviews/*.md")
             let archiveCtx =
                     listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Archives"            `mappend`
@@ -132,7 +153,7 @@ main = (E.setLocaleEncoding E.utf8 >>) $ hakyll $ do
             posts <- recentFirst =<<
                 loadAllSnapshots "posts/*" "content"
             renderAtom feedConfiguration feedCtx posts
-                >>= removeAllIndexHtml
+                >>= removeIndexHtml
 
     create ["rss.xml"] $ do
         route idRoute
@@ -141,15 +162,46 @@ main = (E.setLocaleEncoding E.utf8 >>) $ hakyll $ do
             posts <- recentFirst =<<
                 loadAllSnapshots "posts/*" "content"
             renderRss feedConfiguration feedCtx posts
-                >>= removeAllIndexHtml
+                >>= removeIndexHtml
+
+    create ["reviews/atom.xml"] $ do
+        route idRoute
+        compile $ do
+            let feedCtx = bodyField "description" `mappend` postCtx
+            posts <- recentFirst =<<
+                loadAllSnapshots ("reviews/*" .&&. complement "reviews/*.xml" .&&. complement "reviews/index.html") "content"
+            renderAtom feedConfiguration feedCtx posts
+                >>= removeIndexHtml
+
+    create ["reviews/rss.xml"] $ do
+        route idRoute
+        compile $ do
+            let feedCtx = bodyField "description" `mappend` postCtx
+            posts <- recentFirst =<<
+                loadAllSnapshots ("reviews/*" .&&. complement "reviews/*.xml" .&&. complement "reviews/index.html") "content"
+            renderRss feedConfiguration feedCtx posts
+                >>= removeIndexHtml
 
     match "index.html" $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let indexCtx =
-                    listField "posts" (postCtx `mappend` teaserField "teaser" "content") (return posts) `mappend`
-                    teaserField "teaser" "content"           `mappend`
+                    listField "posts" postCtx (return posts) `mappend`
+                    defaultContext
+
+            getResourceBody
+                >>= applyAsTemplate indexCtx
+                >>= loadAndApplyTemplate "templates/default.html" indexCtx
+                >>= relativizeUrls
+                >>= removeIndexHtml
+
+    match "reviews.html" $ do
+        route $ constRoute "reviews/index.html"
+        compile $ do
+            posts <- recentFirst =<< loadAll "reviews/*.md"
+            let indexCtx =
+                    listField "posts" postCtx (return posts) `mappend`
                     defaultContext
 
             getResourceBody
@@ -166,18 +218,13 @@ main = (E.setLocaleEncoding E.utf8 >>) $ hakyll $ do
 
 
 --------------------------------------------------------------------------------
-postCtx :: Context String
-postCtx = mconcat
-    [ dateField "date" "%B %e, %Y"
-    , postTitleCtx
-    , defaultContext
-    ]
 
 postTitleCtx :: Context String
 postTitleCtx = field "page_title" $ \item -> do
     metadata <- getMetadata (itemIdentifier item)
     return $ maybe "" (++ " | Alexey Shmalko's Personal Blog") $ M.lookup "title" metadata
 
+defaultContext :: Context String
 defaultContext = fullUrlCtx `mappend` H.defaultContext
 
 fullUrlCtx :: Context String
@@ -188,8 +235,8 @@ fullUrlCtx = mapContext fullUrlCtx' (urlField "url")
             | "index.html" `isSuffixOf` x = reverse $ drop 10 $ reverse x
             | otherwise = x
 
-removePosts :: Routes
-removePosts = gsubRoute "posts/" (const "") 
+removePrefix :: String -> Routes
+removePrefix prefix = gsubRoute ('^' : prefix) (const "")
 
 groupByYear :: Routes
 groupByYear = gsubRoute "[0-9]{4}-[0-9]{2}-[0-9]{2}-" (\x -> takeWhile (/= '-') x ++ "/")
@@ -202,15 +249,6 @@ niceRoute = customRoute createIndexRoute
                 p = toFilePath ident
                 normalize :: String -> String
                 normalize p' = if "./" `isPrefixOf` p' then drop 2 p' else p'
-
-removeAllIndexHtml :: Item String -> Compiler (Item String)
-removeAllIndexHtml = return . fmap (withUrls removeIndexStr)
-    where
-        removeIndexStr :: String -> String
-        removeIndexStr url = case splitFileName url of
-            (dir, "index.html") | isLocal dir -> dir
-            _                                 -> url
-            where isLocal = ("http://www.alexeyshmalko.com" `isPrefixOf`)
 
 removeIndexHtml :: Item String -> Compiler (Item String)
 removeIndexHtml = return . fmap (withUrls removeIndexStr)

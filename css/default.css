@@ -2,10 +2,6 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-html>body {
-    line-height: 1.5em;
-}
-
 body, input, button {
     -webkit-font-smoothing: antialiased;
 }
@@ -53,19 +49,8 @@ li:not(:last-child) {
     margin-bottom: 0.7em;
 }
 
-ul, ol {
-    margin-bottom: 0px;
-}
-
 p {
     line-height: 1.5em;
-    padding-top: 0px;
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
-}
-
-blockquote p {
-    margin-top: 0px;
 }
 
 table {
@@ -122,13 +107,6 @@ pre code {
 
 code, pre {
     font-family: monospace, Menlo, Monaco, Consolas, 'Courier New';
-}
-
-p+div.sourceCode, p+pre {
-    margin-top: -0.75em;
-}
-div.sourceCode+p, pre+p {
-    margin-top: 0.75em;
 }
 
 div#footer {
