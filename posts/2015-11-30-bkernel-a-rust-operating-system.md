@@ -1,5 +1,5 @@
 ---
-title: bkernel: a Rust Operating System
+title: "bkernel: a Rust Operating System"
 author: Alexey Shmalko
 tags: bkernel,rust,osdev
 keywords: rust,operating system,embedded

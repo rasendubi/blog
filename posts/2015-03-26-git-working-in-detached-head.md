@@ -1,5 +1,5 @@
 ---
-title: Git: Working in Detached HEAD
+title: "Git: Working in Detached HEAD"
 author: Alexey Shmalko
 tags: git
 keywords: git,detached,head

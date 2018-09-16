@@ -2,3 +2,4 @@ dist
 _site
 _cache
 cabal.sandbox.config
+/.stack-work/

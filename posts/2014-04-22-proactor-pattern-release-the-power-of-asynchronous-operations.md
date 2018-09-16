@@ -1,5 +1,5 @@
 ---
-title: Proactor Pattern: Release the Power of Asynchronous Operations
+title: "Proactor Pattern: Release the Power of Asynchronous Operations"
 author: Alexey Shmalko
 tags: pattern
 keywords: pattern,proactor,proactor pattern

@@ -3,6 +3,7 @@ module Main (main) where
 import           Data.Monoid (mappend)
 import           Hakyll hiding (defaultContext)
 import qualified Hakyll as H (defaultContext)
+import qualified Hakyll.Core.Metadata as Metadata
 
 import Data.List (isInfixOf, isPrefixOf, isSuffixOf)
 import System.FilePath.Posix (takeBaseName, takeDirectory, (</>), splitFileName)
@@ -222,7 +223,7 @@ main = (E.setLocaleEncoding E.utf8 >>) $ hakyll $ do
 postTitleCtx :: Context String
 postTitleCtx = field "page_title" $ \item -> do
     metadata <- getMetadata (itemIdentifier item)
-    return $ maybe "" (++ " | Alexey Shmalko's Personal Blog") $ M.lookup "title" metadata
+    return $ maybe "" (++ " | Alexey Shmalko's Personal Blog") $ Metadata.lookupString "title" metadata
 
 defaultContext :: Context String
 defaultContext = fullUrlCtx `mappend` H.defaultContext

@@ -1,12 +1,15 @@
-resolver: lts-4.1
+resolver: lts-11.1
 
 nix:
   enable: true
   packages:
     - zlib
     - gcc
+    - unzip
 
 flags: {}
 packages:
 - '.'
-extra-deps: []
+
+extra-deps:
+- hakyll-4.12.0.1

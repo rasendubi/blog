@@ -1,5 +1,5 @@
 ---
-title: ProGuard: Real World Example
+title: "ProGuard: Real World Example"
 author: Alexey Shmalko
 tags: Java, obfuscation, ProGuard
 keywords: proguard,example,java,obfuscation

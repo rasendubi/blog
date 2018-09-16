@@ -1,5 +1,5 @@
 ---
-title: Haskell: Defaulting Rules
+title: "Haskell: Defaulting Rules"
 author: Alexey Shmalko
 tags: haskell
 keywords: haskell,defaulting,defaulting rules
