@@ -10,7 +10,7 @@ In this post, I'll try to give some intuition behind IO in Haskell for people wh
 
 <!--more-->
 
-First, let's revisit command pattern. According to [wiki](https://en.wikipedia.org/wiki/Command_pattern):
+First, let's revisit command pattern. According to [Wikipedia](https://en.wikipedia.org/wiki/Command_pattern):
 
 > In [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), the **command pattern** is a [behavioral](https://en.wikipedia.org/wiki/Behavioral_pattern) [design pattern](https://en.wikipedia.org/wiki/Software_design_pattern) in which object is used to [encapsulate](https://en.wikipedia.org/wiki/Information_hiding) all information needed to perform an action or trigger an event at a later time. This information includes the method name, the object that owns the method and values for the method parameters.
 

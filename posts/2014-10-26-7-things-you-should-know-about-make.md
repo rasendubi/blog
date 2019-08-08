@@ -10,7 +10,7 @@ description: A couple of useful make details.
 
 <!--more-->
 
-## How make works
+## 1. How make works
 
 By default, make starts with the first target. This is called the default goal.
 
@@ -22,7 +22,7 @@ Actually, that's recursive algorithm for each target:
 2. For each prerequisite of the target, run this algorithm with that prerequisite as the target;
 3. If either the target does not exist, or if any prerequisite's modification time is newer than the target's modification time, run the recipe associated with the target. If the recipe fails, (usually) make fails.
 
-## Assignment types
+## 2. Assignment types
 
 Make supports variables to ease writing makefiles. They are assigned with one of the following operators: `=`, `?=`, `:=`, `::=`, `+=`, `!=`. The difference between them is the following:
 
@@ -32,7 +32,7 @@ Make supports variables to ease writing makefiles. They are assigned with one of
 * `+=` is append operator. The right-hand side is considered immediate if the variable was previously set with `:=` or `::=`, and deferred otherwise.
 * `!=` is a shell assignment operator. The right-hand side is evaluated immediately and handed to the shell. The result is stored in the variable named on the left.
 
-## Pattern rules
+## 3. Pattern rules
 
 If you have a lot of files that have the same rule, you can easily define a pattern rule that will be used for all matching targets. A pattern rule looks like an ordinary rule, except that its target contains the character '%'. The target is considered a pattern for matching file names; the '%' can match any non-empty substring.
 
@@ -53,7 +53,7 @@ build/%.html: %.md
 
 `$^` is an automatic variable that means dependencies while `$@` means target; so this rule just passes my markdown files through the converter. To see more details on how to write pattern rules and more automatic variables [refer to the manual](http://www.gnu.org/software/make/manual/make.html#Pattern-Rules).
 
-## Default implicit rules
+## 4. Default implicit rules
 
 GNU Make has a set of default rules. So that in lots of cases you don't have to write explicit rules. The list includes, but not limited to, rules for compiling C, C++, assembler programs and linking them. The full list is available at [make manual](https://www.gnu.org/software/make/manual/html_node/Catalogue-of-Rules.html).
 
@@ -67,7 +67,7 @@ CFLAGS := -Wall -Wextra -pedantic -std=c11
 CXXFLAGS := -Wall -Wextra -pedantic -std=c++11
 ```
 
-## Wildcarding and functions
+## 5. Wildcarding and functions
 To compile all C and C++ source files in current directory, use the following code for dependencies: `$(patsubst %.cpp,%.o,$(wildcard *.cpp)) $(patsubst %.c,%.o,$(wildcard *.c))`.
 
 `wildcard` searches for all files matching the pattern and `patsubst` replaces appropriate file extension with `.o`.
@@ -80,7 +80,7 @@ Note that space after comma is considered as part of an argument. That may cause
 
 It's even possible to write your own functions with [`call` function](http://www.gnu.org/software/make/manual/make.html#Call-Function) and kind of parameterized templates with [`eval` function](http://www.gnu.org/software/make/manual/make.html#Eval-Function).
 
-## Search path
+## 6. Search path
 There is special make variable `VPATH` used as a `PATH` for all prerequisites. That is, in the `VPATH` variable, directory names are separated by colons or blanks. The order in which directories are listed is the order followed by make in its search. The rules may then specify the names of files in the prerequisite list as if they all existed in the current directory.
 
 There is also a more fine-grained `vpath` directive. It allows you to specify the search path for every file matching the pattern. So, if you store all your headers in `include` directory, you can use the following line:
@@ -92,7 +92,7 @@ However, while make changes only prerequisite part of the rule and not the rule 
 
 For more information on searching direcotries for prerequisites refer to [make manual](http://www.gnu.org/software/make/manual/make.html#Directory-Search).
 
-## Debugging Makefiles
+## 7. Debugging Makefiles
 
 There a couple of techniques to debug makefiles:
 

@@ -8,6 +8,7 @@ executable site
   other-modules:    Sitemap
   build-depends:    base == 4.*
                   , hakyll
+                  , hakyll-sass
                   , filepath
                   , containers
                   , xml

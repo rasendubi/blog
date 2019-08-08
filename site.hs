@@ -1,9 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main (main) where
 import           Data.Monoid (mappend)
+import           Control.Applicative (empty)
+import           Data.Maybe (fromMaybe, isJust)
 import           Hakyll hiding (defaultContext)
 import qualified Hakyll as H (defaultContext)
 import qualified Hakyll.Core.Metadata as Metadata
+import Hakyll.Web.Sass (sassCompiler)
 
 import Data.List (isInfixOf, isPrefixOf, isSuffixOf)
 import System.FilePath.Posix (takeBaseName, takeDirectory, (</>), splitFileName)
@@ -60,6 +63,11 @@ main = (E.setLocaleEncoding E.utf8 >>) $ hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
+    match "css/*.scss" $ do
+      route $ setExtension "css"
+      let compressCssItem = fmap compressCss
+      compile (compressCssItem <$> sassCompiler)
+
     match "css/**" $ do
         route   idRoute
         compile compressCssCompiler
@@ -92,12 +100,11 @@ main = (E.setLocaleEncoding E.utf8 >>) $ hakyll $ do
           [ dateField "date" "%B %e, %Y"
           , teaserField "teaser" "content"
           , tagsField "tags" tags
-          , postTitleCtx
           , defaultContext
           ]
 
     tagsRules tags $ \tag pattern -> do
-        let title = "Posts tagged \"" ++ tag ++ "\""
+        let title = "Posts tagged “" ++ tag ++ "”"
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll pattern
@@ -138,6 +145,7 @@ main = (E.setLocaleEncoding E.utf8 >>) $ hakyll $ do
             let archiveCtx =
                     listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Archives"            `mappend`
+                    constField "page_title" "Archives"       `mappend`
                     defaultContext
 
             makeItem ""
@@ -220,13 +228,13 @@ main = (E.setLocaleEncoding E.utf8 >>) $ hakyll $ do
 
 --------------------------------------------------------------------------------
 
-postTitleCtx :: Context String
-postTitleCtx = field "page_title" $ \item -> do
+titleCtx :: Context String
+titleCtx = field "page_title" $ \item -> do
     metadata <- getMetadata (itemIdentifier item)
-    return $ maybe "" (++ " | Alexey Shmalko's Personal Blog") $ Metadata.lookupString "title" metadata
+    maybe empty pure $ Metadata.lookupString "title" metadata
 
 defaultContext :: Context String
-defaultContext = fullUrlCtx `mappend` H.defaultContext
+defaultContext = titleCtx `mappend` fullUrlCtx `mappend` H.defaultContext
 
 fullUrlCtx :: Context String
 fullUrlCtx = mapContext fullUrlCtx' (urlField "url")
@@ -262,7 +270,7 @@ removeIndexHtml = return . fmap (withUrls removeIndexStr)
 
 feedConfiguration :: FeedConfiguration
 feedConfiguration = FeedConfiguration
-    { feedTitle = "Alexey Shmalko's Personal Blog"
+    { feedTitle = "Alexey Shmalko's Blog"
     , feedDescription = "Yet another programmer's blog"
     , feedAuthorName = "Alexey Shmalko"
     , feedAuthorEmail = "rasen.dubi@gmail.com"

@@ -5,7 +5,7 @@ tags: book,review
 ---
 
 Recently I have read a wonderful [The Slight Edge: Turning Simple Disciplines into Massive Success and Happiness][slight-edge-amazon] by Jeff Olson.
-I thank [drets][drets] very much for this suggestion.
+(I thank [drets][drets] very much for this suggestion.)
 
 I like this book so much that I recommend it to everyone.
 (I even did "sell" it to my friends five times in a single day.)

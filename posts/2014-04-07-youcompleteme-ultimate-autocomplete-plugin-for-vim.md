@@ -7,7 +7,7 @@ description: How to install and configure YouCompleteMe for Vim.
 ---
 I've used the [clang_complete](http://https://github.com/Rip-Rip/clang_complete "clang_complete") plugin to autocomplete my C code for five months... until YouCompleteMe caught my eye. And now I feel that would stay with it indefinitely.
 
-### Quick overview
+## Quick overview
 
 [YouCompleteMe (YCM)](https://github.com/Valloric/YouCompleteMe "YouCompleteMe") is a fast, as-you-type code completion engine for Vim. It combines and prioritizes the output from several sources:
 
@@ -31,7 +31,7 @@ YCM also provides semantic go-to-definition/declaration commands for C-family la
 
 For the more detailed feature overview, visit an [YCM home page](http://valloric.github.io/YouCompleteMe/ "YouCompleteMe home page").
 
-### Installation
+## Installation
 
 **Edit:** Install instruction changed a bit since this post was published. For full and up-to-date install instructions refer to the [documentation](https://github.com/Valloric/YouCompleteMe/blob/master/README.md#installation).
 
@@ -47,7 +47,7 @@ git submodule update --init --recursive
 
 For me YCM server crashed with its own libclang, so I reinstall YCM with system libclang. Just replace `./install.sh --clang-completer` with `./install.sh --clang-completer --system-clang`
 
-### Default auto-completion for C family
+## Default auto-completion for C family
 
 To auto-complete source code for C family, you should provide custom _.ycm_extra_conf.py_ file for your project. If you don't do this, YCM will be unable to use semantic completion.
 
@@ -63,7 +63,7 @@ You should replace ~/.vim/.ycm_extra_conf.py with path to your default file.
 
 After that, you should place some content to your extra conf. (Use [my config](https://github.com/rasendubi/dotfiles/blob/master/.vim/.ycm_extra_conf.py) as a template if you don't want to bother with this)
 
-### YouCompleteMe and UltiSnips
+## YouCompleteMe and UltiSnips
 
 Default YouCompleteMe conflicts with default [UltiSnips](https://github.com/SirVer/ultisnips "UtliSnips") tab key usage. Both YouCompleteMe and UltiSnips suggest map UltiSnips expand trigger to a different key, but I found this unsatisfactory. Rather than using a different key for UltiSnips it's better to make YCM not use Tab key. To do this, add two following lines to your _.vimrc_:
 
@@ -74,6 +74,6 @@ let g:ycm_key_list_previous_completion=[]
 
 Don't worry, you still be able to cycle through completion with **\<C-N>** and **\<C-P>** keys.
 
-### Conclusion
+## Conclusion
 
 YouCompleteMe provides _a lot_ of features, so it's clear that I stuck with it for a long time.

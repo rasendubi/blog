@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         $if(page_title)$
-            <title>$page_title$</title>
+            <title>$page_title$ | Alexey Shmalko’s Blog</title>
         $else$
-            <title>Alexey Shmalko's Personal Blog</title>
+            <title>Alexey Shmalko’s Blog</title>
         $endif$
         $if(description)$
             <meta name="description" content="$description$" />
@@ -18,10 +18,11 @@
         $endif$
         <link rel="canonical" href="http://www.alexeyshmalko.com$url$" />
 
-        <link rel="alternate" href="/rss.xml" title="Alexey Shmalko's Personal Blog" type="application/rss+xml" />
-        <link rel="alternate" href="/atom.xml" title="Alexey Shmalko's Personal Blog" type="application/atom+xml" />
+        <link rel="alternate" href="/rss.xml" title="Alexey Shmalko's Blog" type="application/rss+xml" />
+        <link rel="alternate" href="/atom.xml" title="Alexey Shmalko's Blog" type="application/atom+xml" />
 
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+        <link href="https://fonts.googleapis.com/css?family=Fira+Mono|Lato|Lora&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/css/default.css" />
     </head>
 
@@ -30,11 +31,9 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+                      Menu
                     </button>
-                    <a class="navbar-brand" href="/">Alexey Shmalko's Personal Blog</a>
+                    <a class="navbar-brand" href="/">Alexey Shmalko’s Blog</a>
                 </div>
                 <div class="collapse navbar-collapse" id="menu-collapse">
                     <ul class="navbar-right nav navbar-nav">
@@ -57,11 +56,6 @@
         <div class="container">
             <div id="content">
                 $body$
-            </div>
-
-            <div id="footer">
-                Powered by
-                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>
         </div>
 

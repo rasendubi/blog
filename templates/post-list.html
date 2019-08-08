@@ -1,13 +1,10 @@
 $for(posts)$
-    <div>
+    <div class="post-item">
         <div class="caption">
             <h1 class="post-title"><a href="$url$">$title$</a></h1>
         </div>
         <div class="info">
             $date$
-            $if(author)$
-                by $author$
-            $endif$
             <br />
             $if(tags)$
             Tags: $tags$
@@ -18,6 +15,5 @@ $for(posts)$
             $teaser$
             <p><a href="$url$" class="more-link">Continue reading...</a></p>
         $endif$
-        <hr />
     </div>
 $endfor$
