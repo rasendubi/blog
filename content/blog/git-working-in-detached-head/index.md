@@ -46,7 +46,7 @@ Work, as usual, commit new changes with `git commit`, amend with `git commit --a
 
 Before pushing your changes, you want to rebase on latest master. You can do this with the following commands:
 
-```zsh
+```shell
 git checkout master # Don't worry, you haven't lost all your work yet
 git pull
 git checkout - # You're safe again

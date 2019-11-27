@@ -4,8 +4,8 @@ author: Alexey Shmalko
 tags: review
 keywords: review
 ---
-I've been really busy these week on business trip, so I read very little and didn't do my reviews. Just want to flush out this one to fulfill the debt.
 
+I've been really busy these week on business trip, so I read very little and didn't do my reviews. Just want to flush out this one to fulfill the debt.
 
 This week:
 

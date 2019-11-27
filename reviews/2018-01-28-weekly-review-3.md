@@ -39,22 +39,24 @@ Here is main info I read this week:
 - **[hledger: journal](http://hledger.org/journal.html)**
 - **[howto: shared expenses](https://mumble.net/~campbell/2017/02/26/ledger/HOWTO-sharedexpense)**
 
-    A general idea of how to track shared expenses. While it's simplistic and does not handle cases when some expenses are non-shared, it gives a general idea which can be adapted further.
+  A general idea of how to track shared expenses. While it's simplistic and does not handle cases when some expenses are non-shared, it gives a general idea which can be adapted further.
+
 - **[hledger/budget-rewrite.sh at 8eb77dce2bd651ccc8b4203f8176bae05f6d3f6c · simonmichael/hledger](https://github.com/simonmichael/hledger/blob/8eb77dce2bd651ccc8b4203f8176bae05f6d3f6c/bin/budget-rewrite.sh)**
 
-    hledger does not currently handle automatic transaction inside the journals. (It could not parse my automatic rules.) This link gives an example of using `hledger-rewrite` to emulate the behavior (i.e., semi-automatic transactions).
+  hledger does not currently handle automatic transaction inside the journals. (It could not parse my automatic rules.) This link gives an example of using `hledger-rewrite` to emulate the behavior (i.e., semi-automatic transactions).
 
-    (In my distribution, `hledger-rewrite` command is not available and `hledger rewrite` subcommand must be used.)
+  (In my distribution, `hledger-rewrite` command is not available and `hledger rewrite` subcommand must be used.)
 
 ### General accounting
 
 - **[The Millionaire Next Door - Wikipedia](https://en.wikipedia.org/wiki/The_Millionaire_Next_Door)**
 
-    This page contains an overview of "The Millionaire Next Door" book.
+  This page contains an overview of "The Millionaire Next Door" book.
 
-    The main idea is UAW/PAW term (Under Accumulator of Wealth).
+  The main idea is UAW/PAW term (Under Accumulator of Wealth).
 
-    It is interesting to know in general, though I believe the formula does not work for young people as it expects you to accumulate wealth along all your lifetime. (Which can't be true while you have almost no income in first ~15 years of your life.)
+  It is interesting to know in general, though I believe the formula does not work for young people as it expects you to accumulate wealth along all your lifetime. (Which can't be true while you have almost no income in first ~15 years of your life.)
+
 - **[I Need A Budget](https://www.barrucadu.co.uk/posts/etc/2017-12-16-i-need-a-budget.html)**
 - **[Ask the Readers: I've Tracked My Expenses -- Now What?](http://www.getrichslowly.org/2011/04/08/ask-the-readers-ive-tracked-my-expenses-now-what/)**
 - **[Track every penny you spend ~ Get Rich Slowly](http://www.getrichslowly.org/2006/09/22/track-every-penny-you-spend/)**
@@ -67,12 +69,14 @@ I used [screenkey](https://www.thregr.org/~wavexx/software/screenkey/) and/or [k
 
 - **[Linux screen recorder, screencasting with FFmpeg](https://www.pcsuggest.com/linux-screen-recorder-ffmpeg/)**
 
-    Record your desktop with:
-    ```sh
-    ffmpeg -f x11grab  -s 3200x1800 -i :0.0 -r 25 -vcodec libx264 output.mkv
-    ```
+  Record your desktop with:
 
-    Use the following command to detect your screen size:
-    ```sh
-    xrandr -q --current | grep '*' | awk '{print$1}'
-    ```
+  ```sh
+  ffmpeg -f x11grab  -s 3200x1800 -i :0.0 -r 25 -vcodec libx264 output.mkv
+  ```
+
+  Use the following command to detect your screen size:
+
+  ```sh
+  xrandr -q --current | grep '*' | awk '{print$1}'
+  ```

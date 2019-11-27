@@ -4,6 +4,7 @@ author: Alexey Shmalko
 tags: review
 keywords: review
 ---
+
 My fifth weekly review.
 
 This week:
@@ -17,10 +18,12 @@ This week:
 <!--more-->
 
 ## Rust
+
 - **[Rust: The ? operator](https://m4rw3r.github.io/rust-questionmark-operator)**. Just a shorter version of `try!` macro.
 - **[rfcs/0000-remove-runtime.md at remove-runtime](https://github.com/aturon/rfcs/blob/remove-runtime/active/0000-remove-runtime.md)**
 
 ### Tokio
+
 [Tokio](https://tokio.rs/) is a platform for writing fast networking code with Rust. It's awesome: green threads without per-thread stack and heap allocations that compile down to state machines.
 
 I won't quote the table of contents, so just start here:
@@ -34,6 +37,7 @@ Most fascinating parts are:
 - **[Tasks and executors](https://tokio.rs/docs/going-deeper/tasks/)**
 
 ## Misc
+
 - **[Modern C++ and Lisp Programming Style](https://chriskohlhepp.wordpress.com/advanced-c-lisp/convergence-of-modern-cplusplus-and-lisp/)**. How C++ template programming is similar to programming in Lisp. (Also, Lisp optimization settings changed my mind about Lisps performance.)
 
 - **[alols/xcape: Linux utility to configure modifier keys to act as other keys when pressed and released on their own](https://github.com/alols/xcape)**. Make your Control key another Escape. (Have you already swapped Control with Caps Lock?)
@@ -47,4 +51,5 @@ Most fascinating parts are:
 - **[Java и Docker: это должен знать каждый](https://habrahabr.ru/company/ruvds/blog/324756/)**. The main point is that `-m` docker's option only limits the maximum allowed memory for an application (the application still able to check all available memory on the machine). That causes troubles when an application allocates memory as a percent of all available memory.
 
 ## Offline reading
+
 I have bought a couple of management books and started reading [Managing for People Who Hate Managing](https://www.amazon.com/Managing-People-Who-Hate-Yourself/dp/1609945735) by Devora Zack. Half of the book is already behind, and it was extremely funny and enjoyable to read.

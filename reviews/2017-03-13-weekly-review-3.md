@@ -15,6 +15,7 @@ This week:
 <!--more-->
 
 ## Emacs
+
 The top topic of this week is making a mail client out of emacs! I probably haven't saved all web pages I've read on the topic. (There are no saved pages on notmuch, which is nice and easy option, which I had set up.)
 
 I haven't finished my setup yet, but when I do, that's a good topic to post about.
@@ -34,6 +35,7 @@ For (2), you can go with either msmtp or emacs built-in smtp support. The former
 \(3) is the most diverse vector. Top three most popular solutions seem to be gnus, mu4e, and notmuch.
 
 ### Mbsync / offlineimap
+
 This is how you fetch email into your box. From the comments all around, mbsync is superior. (In case you wonder, isync is the name of the project, mbsync is the name of the executable.)
 
 - **[Bloerg: Syncing mails with mbsync (instead of OfflineIMAP)](https://bloerg.net/2013/10/09/syncing-mails-with-mbsync-instead-of-offlineimap.html)**
@@ -42,6 +44,7 @@ This is how you fetch email into your box. From the comments all around, mbsync 
 - **[isync - ArchWiki](https://wiki.archlinux.org/index.php/Isync)**
 
 ### Gnus
+
 I have also tried notmuch and it's nice, but its interfaces makes browsing through new messages a bit slower (from usage perspective, implementation is pretty fast).
 
 - **[What's wrong with Gnus](https://www.rath.org/whats-wrong-with-gnus.html)**
@@ -52,6 +55,7 @@ I have also tried notmuch and it's nice, but its interfaces makes browsing throu
 - **[kensanata/ggg: Gmail, Gnus and GPG](https://github.com/kensanata/ggg)**. The main thing is to learn how to encrypt/sign your mail. (Use `mml-secure-message-sign/encrypt-pgpmime` in the mail compose mode.)
 
 ## Cryptography / GPG
+
 One of emacs mail disscussions led me to GPG critique.
 
 - **[GPG And Me](https://moxie.org/blog/gpg-and-me/)**
@@ -59,7 +63,9 @@ One of emacs mail disscussions led me to GPG critique.
 - **[Advanced cryptographic ratcheting](https://whispersystems.org/blog/advanced-ratcheting/)**
 
 ## JavaScript
+
 ### Exploring ES6
+
 I keep reading Exploring ES6 at my lazy time. This week I read next chapters:
 
 - **[9. Variables and scoping](http://exploringjs.com/es6/ch_variables.html)**
@@ -70,11 +76,13 @@ I keep reading Exploring ES6 at my lazy time. This week I read next chapters:
 Yeah... I've skipped 12 because it's huge, but I'm catching up.
 
 ### React
+
 - **[Share Code between React and React Apps](https://hackernoon.com/code-reuse-using-higher-order-hoc-and-stateless-functional-components-in-react-and-react-native-6eeb503c665)**
 - **[acdlite/recompose: A React utility belt for function components and higher-order components.](https://github.com/acdlite/recompose)**
 - **[Our Best Practices for Writing React Components](https://medium.com/code-life/our-best-practices-for-writing-react-components-dec3eb5c3fc8)**
 
 ## Misc
+
 This week I have also set up Jenkins and Hydra for continuous integration, but there are no full-blown articles on the topic I've read.
 
 - **[bringing NIX to its limits](https://invalidmagic.wordpress.com/2011/02/14/bringing-nix-to-its-limits/)**. Running Nix on Windows.

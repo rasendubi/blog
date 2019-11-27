@@ -4,6 +4,7 @@ author: Alexey Shmalko
 tags: review
 keywords: review
 ---
+
 This is my first weekly review in this year. (And first one after a long pause.)
 
 These two weeks:
@@ -17,26 +18,26 @@ These two weeks:
 
 Total articles read: 25
 
-
 ## Productivity
 
 - **[8,760 hours](https://drive.google.com/file/d/0B2PaeRjVqAN7MngxTXFPQkpLVjg/view)**. Absolutely awesome.
 
 - **[A Lack of Time is a Lack of Priorities](https://alexvermeer.com/a-lack-of-time-is-a-lack-of-priorities/)**.
 
-    The idea here is that _you_ can really control how _busy_ you are. Most of the task you think you have to complete are not mandatory in reality. Next time you find yourself busy, stop and think if you really want to do all the tasks.
+  The idea here is that _you_ can really control how _busy_ you are. Most of the task you think you have to complete are not mandatory in reality. Next time you find yourself busy, stop and think if you really want to do all the tasks.
+
 - **[Sleeping well](http://mindingourway.com/sleeping-well/)**
 
-    - always get enough sleep
-    - wake up at fixed time (which shifts with daylight time, though)
-    - use light to get up
-    - don't sleep in after long night
-    - compensate with naps
-    - learn to nap properly
+  - always get enough sleep
+  - wake up at fixed time (which shifts with daylight time, though)
+  - use light to get up
+  - don't sleep in after long night
+  - compensate with naps
+  - learn to nap properly
+
 - **[If You Don’t Want To Regret Your Life 30 Years Later, Make This One Choice Right Now](https://medium.com/the-mission/if-you-dont-want-to-regret-your-life-30-years-later-make-this-one-choice-right-now-1cc137516df0)**.
 
-    Why you focus on short-term goals instead of long-term ones.
-
+  Why you focus on short-term goals instead of long-term ones.
 
 ## Emacs
 
@@ -62,22 +63,26 @@ Total articles read: 25
 - **[To Serve Man, with Software](https://blog.codinghorror.com/to-serve-man-with-software/)**
 - **[go channels are bad and you should feel bad](http://www.jtolds.com/writing/2016/03/go-channels-are-bad-and-you-should-feel-bad/)**
 
-    In short:
-    - go channels have bad API (throw panics, non-symmetric)
-    - channels block (which makes them hard to use with mutexes and other traditional synchronization primitives)
-    - not powerful enough
+  In short:
 
-    This also reminded me of Haskell, which also has M:N scheduling and is much nicer. (as a bonus, Haskell's GC detects endlessly blocked channels)
+  - go channels have bad API (throw panics, non-symmetric)
+  - channels block (which makes them hard to use with mutexes and other traditional synchronization primitives)
+  - not powerful enough
+
+  This also reminded me of Haskell, which also has M:N scheduling and is much nicer. (as a bonus, Haskell's GC detects endlessly blocked channels)
+
 - **[What Color is Your Function?](http://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/)**
 
-    A post about asynchronous programming, async-await, generators and green threads. (Green threads been the best.)
+  A post about asynchronous programming, async-await, generators and green threads. (Green threads been the best.)
 
-    The post does not mention Haskell, but it has green threads, too.
+  The post does not mention Haskell, but it has green threads, too.
+
 - **[A 5-second fix might make your Chrome browser much smoother](http://bgr.com/2016/03/18/fix-slow-chrome-browser-scrolling-lag/)**
 
-    Go to [chrome://flags/#smooth-scrolling](chrome://flags/#smooth-scrolling) and disable smooth scrolling feature.
+  Go to [chrome://flags/#smooth-scrolling](chrome://flags/#smooth-scrolling) and disable smooth scrolling feature.
 
-    Well, this does not _fix_ my lag, but made it less frequent
+  Well, this does not _fix_ my lag, but made it less frequent
+
 - **[Lessons from the impl period](http://smallcultfollowing.com/babysteps/blog/2018/01/05/lessons-from-the-impl-period/)**
 
-    Rust compiler team has structured the year to include an "implementation period," when they particularly focus on compiler implementation. Here are some notes on what worked well and what didn't. In particular, focusing working groups on goals rather than compiler parts is a nice idea I like.
+  Rust compiler team has structured the year to include an "implementation period," when they particularly focus on compiler implementation. Here are some notes on what worked well and what didn't. In particular, focusing working groups on goals rather than compiler parts is a nice idea I like.

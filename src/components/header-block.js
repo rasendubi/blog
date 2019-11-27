@@ -5,7 +5,7 @@ import { rhythm } from '../utils/typography';
 
 const HeaderBlock = ({ title, url, date }) => {
   const titleBlock = url ? (
-    <Link style={{ boxShadow: `none` }} to={url}>
+    <Link style={{ boxShadow: `none`, color: 'unset' }} to={url}>
       {title}
     </Link>
   ) : (

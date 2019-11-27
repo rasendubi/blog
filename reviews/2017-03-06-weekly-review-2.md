@@ -22,6 +22,7 @@ This week:
 - **[ES proposal: import() – dynamically importing ES modules](http://www.2ality.com/2017/01/import-operator.html)**
 
 ### Exploring ES6
+
 I have started reading **[Exploring ES6](http://exploringjs.com/es6.html)** and I enjoy it so far. It is a nice and quick way to grasp new javascript if you are already familiar with programming.
 
 Chapters read so far:
@@ -34,10 +35,12 @@ Chapters read so far:
 - **[8. Template literals](http://exploringjs.com/es6/ch_template-literals.html)**
 
 ## Nix / NixOS
+
 - **[NixOS Weekly](http://weekly.nixos.org/2017/03-better-late-then-never.html)**
 - **[Sander van der Burg's blog: Push and pull deployment of Nix packages](http://sandervanderburg.blogspot.com/2016/10/push-and-pull-deployment-of-nix-packages.html)**
 
 ## Docker and containerization
+
 - **[Why and How to Use Docker for Development](https://medium.com/iron-io-blog/why-and-how-to-use-docker-for-development-a156c1de3b24)**
 - **[Why we don't let non-root users run Docker in CentOS, Fedora, or RHEL](http://www.projectatomic.io/blog/2015/08/why-we-dont-let-non-root-users-run-docker-in-centos-fedora-or-rhel/)**. I can leave with `sudo docker` for now.
 - **[Supervisor: A Process Control System — Supervisor 3.3.1 documentation](http://supervisord.org/)**. A lightweight systemd alternative for containers. It is also nice to use without containers, too.
@@ -58,5 +61,5 @@ By the way, I'm searcing for a non-root containerization. The only thing I can t
 - **[Pocket Wants You To Read Ads Later Too](https://techcrunch.com/2016/02/23/the-netflix-of-text/)**. Pocket has a good monetization through ads.
 - **[How to Keep Emotions From Running Your Life](http://www.raptitude.com/2017/02/how-to-keep-emotions-from-running-your-life/)**. I should give this more thoughts and start practicing.
 - **[The Rise of the Monk Mode Morning](http://calnewport.com/blog/2017/02/24/the-rise-of-the-monk-mode-morning/)**. I should try this somewhen.
-- **[Tag (metadata)](https://en.wikipedia.org/wiki/Tag_(metadata))**. Especially knowledge tags.
+- **[Tag (metadata)](<https://en.wikipedia.org/wiki/Tag_(metadata)>)**. Especially knowledge tags.
 - **[Folksonomy](https://en.m.wikipedia.org/wiki/Folksonomy)**

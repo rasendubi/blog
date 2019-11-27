@@ -11,34 +11,41 @@ I'm starting doing my weekly reviews. Here are a list of most interesting articl
 <!--more-->
 
 ## Docker
+
 - **[Docker: Using Linux Containers to Support Portable Application Deployment](https://www.infoq.com/articles/docker-containers)**
 - **[Containers & Docker: How Secure Are They?](https://blog.docker.com/2013/08/containers-docker-how-secure-are-they/)**
 
 ## Emacs
+
 - **[Emacs Keybinding Efficiency: Page Up/Down and Pigeon Hole Principle](http://ergoemacs.org/emacs/emacs_key_combo.html)**
 
 ## Design
+
 - **[Крэш-курс по UI-дизайну](https://habrahabr.ru/company/iloveip/blog/321728/)** (Crash-course into UI design.)
 - **[С маленькой или с Большой](https://habrahabr.ru/company/edison/blog/315360/)** (Title case vs. sentence case.)
 - **[Что такое «правило внутреннего и внешнего»?](http://artgorbunov.ru/bb/soviet/20140818/)**
 
 ## NixOS
+
 - **[NixOS Weekly #03 - Better Late Than Never](http://weekly.nixos.org/2017/03-better-late-then-never.html)**
 - **[NixOS Linux vs CoreOS Container Linux](https://www.vandorp.biz/2017/02/nixos-linux-vs-coreos-container-linux/)**
 - **[Why Puppet/Chef/Ansible aren't good enough (and we can do better)](https://www.domenkozar.com/2014/03/11/why-puppet-chef-ansible-arent-good-enough-and-we-can-do-better/)**. Now I know what Puppet/Chef/Ansible are about.
 
 ## JavaScript
+
 - **[How to dispatch a Redux action with a timeout?](http://stackoverflow.com/q/35411423/2538771)**. Good tutorials on how to handle Async actions with Redux.
 - **[mobxjs/mobx: Simple, scalable state management](https://github.com/mobxjs/mobx)**. Redux alternative.
 - **[heroku/react-refetch: A simple, declarative, and composable way to fetch data for React components](https://github.com/heroku/react-refetch)**.
 
 ## Linux graphical stack
+
 Two nice articles that describe graphical components and their role in a Linux system.
 
 - **[Что придет на замену X Window System?](https://habrahabr.ru/post/321470/)**
 - **[Графический стек Linux](https://habrahabr.ru/post/148954/)**
 
 ## General programming
+
 - **[The Twelve-Factor App](https://12factor.net/)**
 
 - **[Новый GC Epsilon. У джавы может не быть сборки мусора. Шок. Сенсация](https://habrahabr.ru/post/321856/)**. Java got new (non-)GC Epsilon. _[«Why don't we implement "no" GC in HotSpot, and win every single 5-second latency benchmark. 100 GB heap is enough to survive for 10 secs.»](https://twitter.com/shipilev/status/830759245016600579)_
