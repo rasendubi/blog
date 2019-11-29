@@ -54,8 +54,6 @@ That's a cron rule to run specified script every hour.
 
 After that, a popup will appear every hour displaying one tip.
 
-#### Other option
-
 If you don't have or don't want to utilize cron, you are free to select any alternative that will execute the script at given interval.
 
 For example, you may run the script manually inside the infinite loop:

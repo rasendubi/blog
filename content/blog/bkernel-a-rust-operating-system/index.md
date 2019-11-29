@@ -11,7 +11,7 @@ _**TL;DR** I'm writing an operating system in [Rust](https://www.rust-lang.org/)
 
 I've been developing embedded operating systems for living for a couple of years now. And... I got tired of work, all the bureaucracy, hard to debug issues, a zillion of low-level details; I wasn't even sure I want to continue work in the field, so I started a side project. It may come as a surprise I started yet another operating system when the same thing led me to this. Well, it's not same; I'm building a new operating system to experiment, and this refuels me with the passion to the field.
 
-Here are my progress and some impressions of Rust after a month of development (the code is [here](https://github.com/rasendubi/bkernel)).
+Here are my progress and some impressions of Rust after a month of development (check the code [at my GitHub repository](https://github.com/rasendubi/bkernel)).
 
 <!--more-->
 

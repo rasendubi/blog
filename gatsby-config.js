@@ -2,9 +2,9 @@ module.exports = {
   siteMetadata: {
     title: `Alexey Shmalko’s blog`,
     author: `Alexey Shmalko`,
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://alexeyshmalko.com/`,
-    disqusUrlPrefix: `http://www.alexeyshmalko.com`,
+    description: `A blog about programming, technology, and self-development`,
+    siteUrl: `https://www.alexeyshmalko.com`,
+    disqusUrlPrefix: `https://www.alexeyshmalko.com`,
     social: {
       email: 'rasen.dubi@gmail.com',
       github: 'rasendubi',
@@ -90,5 +90,19 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: 'https://www.alexeyshmalko.com',
+        stripQueryString: true,
+      }
+    },
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        showSpinner: false,
+      }
+    }
   ],
 };
