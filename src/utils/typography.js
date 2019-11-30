@@ -12,7 +12,7 @@ StowLake.overrideThemeStyles = ({ rhythm, scale }) => {
       textDecoration: 'none',
     },
     'a:hover, a:focus': {
-      color: '#004766'
+      color: '#004766',
     },
     'a > code, a:visited > code': {
       color: '#07a !important',

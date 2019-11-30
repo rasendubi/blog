@@ -12,7 +12,6 @@ class Layout extends React.Component {
         <header>
           <h4
             style={{
-              // fontFamily: `Montserrat, sans-serif`,
               margin: `${rhythm(0.5)} ${rhythm(3 / 4)}`,
             }}
           >
@@ -37,11 +36,6 @@ class Layout extends React.Component {
           }}
         >
           <main>{children}</main>
-          {/* <footer> */}
-          {/*   © {new Date().getFullYear()}, Built with */}
-          {/*   {` `} */}
-          {/*   <a href="https://www.gatsbyjs.org">Gatsby</a> */}
-          {/* </footer> */}
         </div>
       </>
     );

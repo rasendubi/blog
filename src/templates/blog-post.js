@@ -39,10 +39,11 @@ class BlogPostTemplate extends React.Component {
           />
         </article>
 
-        <footer>
-          <Disqus config={disqusConfig} />
-        </footer>
-
+        {process.env.NODE_ENV === 'production' && (
+          <footer>
+            <Disqus config={disqusConfig} />
+          </footer>
+        )}
         <nav>
           <ul
             style={{

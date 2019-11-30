@@ -82,7 +82,7 @@ module.exports = {
     //     icon: `content/assets/gatsby-icon.png`,
     //   },
     // },
-    `gatsby-plugin-offline`,
+    // `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-typography`,
@@ -95,14 +95,14 @@ module.exports = {
       options: {
         siteUrl: 'https://www.alexeyshmalko.com',
         stripQueryString: true,
-      }
+      },
     },
     `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-nprogress`,
       options: {
         showSpinner: false,
-      }
-    }
+      },
+    },
   ],
 };

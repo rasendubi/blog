@@ -39,7 +39,7 @@ If you have a lot of files that have the same rule, you can easily define a patt
 
 In my blog directory I have the next Makefile:
 
-```make
+```makefile
 all: \
     build/random-advice.html \
     build/proactor.html \
@@ -63,7 +63,7 @@ It's possible to don't have Makefile at all. For example, you can just save sour
 The recipes are defined in the form `$(CC) $(CPPFLAGS) $(CFLAGS) -c`. That makes it possible to change the rule by changing variables. To compile source files with clang just add the following line: `CC := clang`.
 In the directory I'm using for saving my small test programs I have a tiny Makefile:
 
-```make
+```makefile
 CFLAGS := -Wall -Wextra -pedantic -std=c11
 CXXFLAGS := -Wall -Wextra -pedantic -std=c++11
 ```
@@ -88,7 +88,7 @@ There is special make variable `VPATH` used as a `PATH` for all prerequisites. T
 
 There is also a more fine-grained `vpath` directive. It allows you to specify the search path for every file matching the pattern. So, if you store all your headers in `include` directory, you can use the following line:
 
-```make
+```makefile
 vpath %.h include
 ```
 
