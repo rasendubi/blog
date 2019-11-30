@@ -17,6 +17,7 @@ module.exports = {
       options: {
         path: `${__dirname}/content/blog`,
         name: `blog`,
+        ignore: process.env.NODE_ENV === 'production' && ['**/_*'],
       },
     },
     {
