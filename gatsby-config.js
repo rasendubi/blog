@@ -105,5 +105,16 @@ module.exports = {
         showSpinner: false,
       },
     },
+    {
+      resolve: `gatsby-plugin-webpack-bundle-analyzer`,
+      options: {
+        production: true,
+
+        analyzerMode: 'static',
+        reportFilename: '../report.html',
+        defaultSizes: 'gzip',
+        openAnalyzer: false,
+      }
+    },
   ],
 };
