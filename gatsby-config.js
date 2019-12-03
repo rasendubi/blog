@@ -115,7 +115,7 @@ module.exports = {
         reportFilename: '../report.html',
         defaultSizes: 'gzip',
         openAnalyzer: false,
-      }
+      },
     },
     {
       resolve: `gatsby-plugin-s3`,
@@ -126,6 +126,6 @@ module.exports = {
 
         removeNonexistentObjects: false,
       },
-    }
+    },
   ],
 };
