@@ -105,6 +105,7 @@ module.exports = {
         showSpinner: false,
       },
     },
+    `gatsby-plugin-no-sourcemaps`,
     {
       resolve: `gatsby-plugin-webpack-bundle-analyzer`,
       options: {
@@ -116,5 +117,15 @@ module.exports = {
         openAnalyzer: false,
       }
     },
+    {
+      resolve: `gatsby-plugin-s3`,
+      options: {
+        bucketName: 'www.alexeyshmalko.com',
+        protocol: 'https',
+        hostname: 'www.alexeyshmalko.com',
+
+        removeNonexistentObjects: false,
+      },
+    }
   ],
 };
