@@ -31,14 +31,14 @@ StowLake.overrideThemeStyles = ({ rhythm, scale }) => {
     },
 
     p: {
-      marginBottom: rhythm(3 / 4),
+      marginBottom: rhythm(2 / 4),
     },
   };
 };
 StowLake.overrideStyles = ({ rhythm, scale }) => {
   return {
     h2: {
-      marginTop: rhythm(2),
+      marginTop: rhythm(1),
       marginBottom: rhythm(1 / 4),
     },
     h3: {
