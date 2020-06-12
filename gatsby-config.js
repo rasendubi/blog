@@ -44,7 +44,37 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-prismjs`,
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              languageExtensions: [
+                {
+                  language: 'org',
+                  definition: {
+
+                    'code-block': {
+                      pattern: /#\+begin_src( .*)\n(.|\n)*?\n#\+end_src/,
+                      inside: {
+                        'org-block-begin-line': /#\+begin_src.*/i,
+                        'org-block-end-line': /#\+end_src/i,
+                      },
+                    },
+
+                    'title important': {
+                      pattern: /\*+ .*/,
+                      inside: {
+                        punctuation: /\*+/
+                      },
+                    },
+
+                    comment: /(#+.*)/,
+
+                    'org-code': /~.*?~/,
+                  },
+                }
+              ],
+            },
+          },
           `gatsby-remark-copy-linked-files`,
           {
             resolve: `gatsby-remark-smartypants`,
@@ -105,6 +135,7 @@ module.exports = {
         showSpinner: false,
       },
     },
+    `gatsby-plugin-sass`,
     `gatsby-plugin-no-sourcemaps`,
     {
       resolve: `gatsby-plugin-webpack-bundle-analyzer`,

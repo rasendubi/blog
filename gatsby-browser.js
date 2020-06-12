@@ -3,4 +3,4 @@ import 'typeface-lato';
 import 'typeface-lora';
 
 // prismjs highlighting
-import 'prismjs/themes/prism.css';
+import './prism-modus-operandi.scss';
