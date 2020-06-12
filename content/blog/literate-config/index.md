@@ -17,12 +17,12 @@ Tools that help me do that without losing my sanity are [NixOS], [Home Manager],
 NixOS allows managing operating system configuration using a single file.
 Home Manager extends that concept to applications and settings that usually live in the home directory.
 
-But today I want to talk about Org-mode and Literate Configuration.
+But today I want to talk about Org-mode and *Literate Configuration.*
 
 This post is not a tutorial but rather my impression after using this setup for four years now.
 
 [dotfiles]: https://github.com/rasendubi/dotfiles
-[first-version]: https://github.com/rasendubi/dotfiles/commit/a564ca55803706c5f2f01e9e9fc6da1396d1c4b3#diff-9f2717ecb7c66e36c9654b48424ae983
+[first-version]: https://github.com/rasendubi/dotfiles/commit/4b76a44b8dbe6f98893fbf88f53c0da3197f90b7
 [emacs-configuration]: https://github.com/rasendubi/dotfiles/blob/34a0ff79678a1a10f6796e2e826537c096b081fd/emacs.org
 [NixOS]: https://nixos.org/
 [Home Manager]: https://github.com/rycee/home-manager
@@ -190,9 +190,9 @@ As a bonus, self-contained sections are easier to ditch---delete the section, an
 Technically, I can achieve the same decoupling and atomicity by splitting NixOS configurations into multiple files. 
 
 However, Org sections are much easier to create and work with.
-This results in me having more small sections.
+This results in me having smaller sections.
 
-Would I create a separate section for screen brightness if I didn't use org? Unlikely---I would probably just plug it into a larger "X configuration" file.
+Would I create a separate file for screen brightness if I didn't use org? Unlikely---I would probably just plug it into a larger "X configuration" file.
 
 ## Caveats
 
@@ -232,7 +232,7 @@ This also makes the system harder to understand.
 
 I like my configuration---for me, pros outweigh cons.
 
-Now that [Emacs is my WM][EXWM], I even consider merging NixOS and Emacs configurations into a single file. That makes sense because my NixOS configuration is incomplete.
+Now that [Emacs is my Window Manager][EXWM], I even consider merging NixOS and Emacs configurations into a single file. That makes sense because my NixOS configuration is incomplete.
 For example, it shows that I use slock and xss-lock, but it does not show *how*---you have to look at Emacs configuration for that.
 The same goes for email setup: NixOS files show how to configure applications, but the main interface is notmuch mode in Emacs.
 

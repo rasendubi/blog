@@ -128,7 +128,7 @@ pre[class*="language-"] {
 pre > code[class*="language-"] {
     font-size: 1em;
     display: inline-block;
-    width: 100%;
+    min-width: 100%;
 }
 
 pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
