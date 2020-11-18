@@ -3,7 +3,7 @@ let
 in
 pkgs.mkShell {
   buildInputs = [
-    pkgs.nodejs-13_x
+    pkgs.nodejs-14_x
     # to compile node package
     pkgs.autoconf
 

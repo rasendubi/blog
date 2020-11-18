@@ -143,7 +143,7 @@ module.exports = {
         production: true,
 
         analyzerMode: 'static',
-        reportFilename: '../report.html',
+        reportFilename: './report.html',
         defaultSizes: 'gzip',
         openAnalyzer: false,
       },
