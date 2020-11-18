@@ -1,8 +1,8 @@
 ---
-title: "2019: Year in Review"
+title: '2019: Year in Review'
 author: Alexey Shmalko
 tags: review
-date: "2019-12-31T04:22+0200"
+date: '2019-12-31T04:22+0200'
 ---
 
 The year 2019 turned out to be extremely fruitful---especially on changes.
@@ -27,7 +27,7 @@ Besides the fact that we committed every startup mistake possible, and I felt li
 It's like... not the difference that I would like to make in the world.
 
 Ready to hear my life purpose?
-*I want to make programming better.*
+_I want to make programming better._
 (I know it's broad.)
 
 For the last six months, I've been working on the idea of projectional/structural code editors.
@@ -50,6 +50,7 @@ I've started ordering paper books from Amazon.
 It is more pricey, but who cares.
 
 I still read ebooks, but paper ones are better sometimes:
+
 - Better imagery. If a book is high on visuals, it might be hard to read on Kindle. This is especially important for design books.
 - You can share paper books. I love sharing books, and you can't do that with ebooks.
 
@@ -69,9 +70,10 @@ I've skipped only 11 days this year, and my current streak is 239 consecutive da
 That said, meditation is only a part of the more massive effort on increasing consciousness, but it's foundational.
 
 The benefits from the whole effort so far:
-- *I am better at identifying and handling emotions.* A year ago, I would say that I am not an emotional person. I am. (Everyone is.)
-- *Less bullshitting to myself and others.* I've uncovered some ways I've been self-deceiving myself and pretended I am the person I am not. I am also better at detecting masks and hats I wear and stripping that off. I burned my 2019 year plan because it was completely off now.
-- *I handle loneliness better, and I can be alone for long periods.* Not that I am hiding and avoiding social contact, I am just less *needy:* I don't feel like I *need* to talk to somebody all the time. It's freeing.
+
+- _I am better at identifying and handling emotions._ A year ago, I would say that I am not an emotional person. I am. (Everyone is.)
+- _Less bullshitting to myself and others._ I've uncovered some ways I've been self-deceiving myself and pretended I am the person I am not. I am also better at detecting masks and hats I wear and stripping that off. I burned my 2019 year plan because it was completely off now.
+- _I handle loneliness better, and I can be alone for long periods._ Not that I am hiding and avoiding social contact, I am just less _needy:_ I don't feel like I _need_ to talk to somebody all the time. It's freeing.
 
 [simple-habit]: https://try.simplehabit.com/
 [the-mind-illuminated]: https://www.amazon.com/Mind-Illuminated-Meditation-Integrating-Mindfulness-ebook/dp/B01INMZKAQ/

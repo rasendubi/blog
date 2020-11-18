@@ -1,7 +1,7 @@
 ---
-title: "4 Years with Literate Configuration"
+title: '4 Years with Literate Configuration'
 author: Alexey Shmalko
-date: "2020-06-12T23:08+0300"
+date: '2020-06-12T23:08+0300'
 ---
 
 I store all my configuration files in an open [dotfiles] repository.
@@ -12,21 +12,21 @@ The configuration is so complete that I can wipe my drive and restore the system
 
 Dealing with a ton of configuration files---even without publishing them openly---is a lot of work, and can get unmanageable quickly.
 
-Tools that help me do that without losing my sanity are [NixOS], [Home Manager], and [Org-mode] ([org-babel]).
+Tools that help me do that without losing my sanity are [NixOS], [Home Manager], and [Org-mode]([org-babel]).
 
 NixOS allows managing operating system configuration using a single file.
 Home Manager extends that concept to applications and settings that usually live in the home directory.
 
-But today I want to talk about Org-mode and *Literate Configuration.*
+But today I want to talk about Org-mode and _Literate Configuration._
 
 This post is not a tutorial but rather my impression after using this setup for four years now.
 
 [dotfiles]: https://github.com/rasendubi/dotfiles
 [first-version]: https://github.com/rasendubi/dotfiles/commit/4b76a44b8dbe6f98893fbf88f53c0da3197f90b7
 [emacs-configuration]: https://github.com/rasendubi/dotfiles/blob/34a0ff79678a1a10f6796e2e826537c096b081fd/emacs.org
-[NixOS]: https://nixos.org/
-[Home Manager]: https://github.com/rycee/home-manager
-[Org-mode]: https://orgmode.org/
+[nixos]: https://nixos.org/
+[home manager]: https://github.com/rycee/home-manager
+[org-mode]: https://orgmode.org/
 [org-babel]: https://orgmode.org/worg/org-contrib/babel/
 
 <!--more-->
@@ -40,7 +40,7 @@ It allows keeping related parts close together---even if they belong to differen
 
 As an example, I use [mbsync], [msmtp], and [notmuch] to deal with email load.
 These are separate applications with their own configuration files, but logically they are coupled---adding a new email address requires changing all three configurations.
-Org-mode allows keeping all three configurations in a single file, which are then *tangled* (exported) to their respective locations.
+Org-mode allows keeping all three configurations in a single file, which are then _tangled_ (exported) to their respective locations.
 
 [mbsync]: http://isync.sourceforge.net/
 [msmtp]: https://marlam.de/msmtp/
@@ -51,6 +51,7 @@ This decoupling ability is not limited to separate files, though---you can reorg
 An example is my NixOS configuration to install Emacs and its plugins.
 
 Using simplified pseudo-code, the main fragment looks like this ([real code is here][real-code]):
+
 ```nix
 {
   description = "rasendubi's NixOS configuration";
@@ -80,6 +81,7 @@ Using simplified pseudo-code, the main fragment looks like this ([real code is h
 Highlighted lines allow me to define inputs, configurations, packages, and overlays in other places.
 
 Now for Emacs, I can write a single section that modifies all these parts:
+
 ```org
 ** Emacs
 
@@ -132,6 +134,7 @@ services.emacs = {
 
 Org-mode has good folding support.
 Folding means my 4k-line Emacs configuration looks like this:
+
 ```org
 * Configuration infrastructure…
 * EXWM…
@@ -179,15 +182,15 @@ For Home Manager–managed hosts:
 #+end_src
 ```
 
-It's a small section, but it shows how to get screen brightness working: install `acpilight` *and* add yourself to the `video` group. (It also shows how to do that for both NixOS and Home Manager.)
+It's a small section, but it shows how to get screen brightness working: install `acpilight` _and_ add yourself to the `video` group. (It also shows how to do that for both NixOS and Home Manager.)
 
-[Screen brightness]: https://github.com/rasendubi/dotfiles/blob/34a0ff79678a1a10f6796e2e826537c096b081fd/README.org#screen-brightness
+[screen brightness]: https://github.com/rasendubi/dotfiles/blob/34a0ff79678a1a10f6796e2e826537c096b081fd/README.org#screen-brightness
 
 As a bonus, self-contained sections are easier to ditch---delete the section, and both acpilight and video group are gone.
 
 ### Granularity
 
-Technically, I can achieve the same decoupling and atomicity by splitting NixOS configurations into multiple files. 
+Technically, I can achieve the same decoupling and atomicity by splitting NixOS configurations into multiple files.
 
 However, Org sections are much easier to create and work with.
 This results in me having smaller sections.
@@ -232,12 +235,11 @@ This also makes the system harder to understand.
 
 I like my configuration---for me, pros outweigh cons.
 
-Now that [Emacs is my Window Manager][EXWM], I even consider merging NixOS and Emacs configurations into a single file. That makes sense because my NixOS configuration is incomplete.
-For example, it shows that I use slock and xss-lock, but it does not show *how*---you have to look at Emacs configuration for that.
+Now that [Emacs is my Window Manager][exwm], I even consider merging NixOS and Emacs configurations into a single file. That makes sense because my NixOS configuration is incomplete.
+For example, it shows that I use slock and xss-lock, but it does not show _how_---you have to look at Emacs configuration for that.
 The same goes for email setup: NixOS files show how to configure applications, but the main interface is notmuch mode in Emacs.
 
-[EXWM]: https://github.com/rasendubi/dotfiles/commit/34a0ff79678a1a10f6796e2e826537c096b081fd
+[exwm]: https://github.com/rasendubi/dotfiles/commit/34a0ff79678a1a10f6796e2e826537c096b081fd
 
 That being said, I can only judge from the author's perspective.
 I don't know how it looks from the outside? how do people perceive it when they see it the first time? is it easy to find interesting sections?
-

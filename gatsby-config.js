@@ -51,7 +51,6 @@ module.exports = {
                 {
                   language: 'org',
                   definition: {
-
                     'code-block': {
                       pattern: /#\+begin_src( .*)\n(.|\n)*?\n#\+end_src/,
                       inside: {
@@ -63,7 +62,7 @@ module.exports = {
                     'title important': {
                       pattern: /\*+ .*/,
                       inside: {
-                        punctuation: /\*+/
+                        punctuation: /\*+/,
                       },
                     },
 
@@ -71,7 +70,7 @@ module.exports = {
 
                     'org-code': /~.*?~/,
                   },
-                }
+                },
               ],
             },
           },
