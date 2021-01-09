@@ -12,8 +12,9 @@ export default function HTML(props) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <script
-          src="https://cdn.usefathom.com/script.js"
-          data-site="JUVHZIDF"
+          src="https://tahr.rasen.dev/script.js"
+          data-spa="auto"
+          data-site="PCSQWUMO"
           defer
         ></script>
         {props.headComponents}
