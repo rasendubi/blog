@@ -11,6 +11,11 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        <script
+          src="https://cdn.usefathom.com/script.js"
+          data-site="JUVHZIDF"
+          defer
+        ></script>
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>
